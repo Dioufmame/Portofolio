@@ -306,10 +306,10 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .toggles { display: flex; flex-wrap: wrap; gap: 8px; }
 .sim .tg { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; color: var(--ink); font-size: .86rem; }
 .sim .tg input { accent-color: var(--lagoon); }
-.gauge { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--lagoon) 0 35%, var(--gold) 35% 60%, var(--bad) 60% 100%); position: relative; opacity: .9; }
+.gauge { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--bad) 0 30%, var(--gold) 30% 60%, var(--lagoon) 60% 100%); position: relative; opacity: .9; }
 .gauge i { position: absolute; top: -5px; width: 4px; height: 22px; background: var(--ink); border-radius: 2px; transform: translateX(-2px); transition: left .3s ease; }
 .sim-out { display: grid; gap: 4px; }
-.sim-out b { font-family: var(--display); font-size: 2.2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.sim-out b { font-family: var(--display); font-size: 1.6rem; line-height: 1; font-variant-numeric: tabular-nums; }
 .sim-out span { color: var(--muted); font-size: .92rem; }
 .zoning { background: var(--band); color: var(--band-ink); border-radius: 22px; padding: clamp(24px, 3.5vw, 40px); display: grid; gap: 24px; }
 .zone-intro { display: grid; gap: 8px; max-width: 640px; }
@@ -326,6 +326,19 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .zone-train { border-left: 3px solid var(--gold); padding-left: 16px; display: grid; gap: 4px; }
 .zone-train b { font-family: var(--display); }
 @media (max-width: 900px) { .case-grid, .zone-map { grid-template-columns: 1fr; } }
+
+
+.memo { font-family: var(--mono); font-size: .8rem; color: var(--ink); border-left: 3px solid var(--lagoon); padding-left: 12px; }
+.effects { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.effects li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: start; }
+.effects b { font-family: var(--display); }
+.effects p { color: var(--muted); font-size: .9rem; }
+.eff { font-family: var(--mono); font-size: .9rem; text-align: center; border-radius: 8px; padding: 4px 0; }
+.eff.up { background: var(--lagoon-soft); color: var(--lagoon); }
+.eff.down { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); }
+.models { margin-bottom: 20px; }
+.score tr.kept td { background: var(--lagoon-soft); font-weight: 600; }
+.zoning .chips li { background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--gold); }
 
 /* Galerie de dashboards */
 .notice { max-width: 720px; font-size: .92rem; color: var(--ink); background: var(--gold-soft); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 12px 16px; }
@@ -661,7 +674,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         <ul class="ticks">
           <li><b>Churn et rétention</b> : lien entre signalisations clients et résiliation, causes principales, actions correctives ciblées.</li>
           <li><b>Segmentation client</b> pour des campagnes marketing ciblées sur le parc fibre.</li>
-          <li><b>Modèle de régression logistique</b> qui détecte les partenaires de vente en passe de sous-performer et a servi à refaire le zonage commercial (<a href="#cas">voir l'étude de cas</a>).</li>
+          <li><b>Modèle de régression logistique</b> qui détecte les partenaires de vente en passe de sous-performer et a servi à refaire le zonage commercial, issu de mon mémoire de master (<a href="#cas">voir l'étude de cas</a>).</li>
           <li><b>Prévisions et simulations</b> des ventes partenaires Door To Door pour repérer les écarts avant la fin du mois.</li>
           <li><b>Data mining sur les CRM</b> pour isoler les clients à fort potentiel de réachat et orienter les campagnes les plus rentables.</li>
         </ul>
@@ -681,84 +694,71 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
 <section class="case-section" id="cas">
   <div class="wrap">
     <div class="case-head">
-      <span class="label">Étude de cas · Orange CI</span>
-      <h2>Prédire les partenaires en difficulté, puis redessiner la carte des ventes.</h2>
-      <p>J'ai construit un modèle de régression logistique qui repère les partenaires de vente terrain en passe de sous-performer. Ses résultats ont servi à refaire le zonage : chaque partenaire a été placé là où il avait le plus de chances de réussir.</p>
-      <p class="notice" role="note"><b>Données fictives.</b> Les variables et la démarche reflètent le projet réel. Les coefficients, scores et métriques affichés sur cette section sont inventés pour l'illustration.</p>
+      <span class="label">Étude de cas · Mémoire de master, réalisé chez Orange CI</span>
+      <h2>Comprendre pourquoi des partenaires de vente décrochent, puis redessiner la carte.</h2>
+      <p class="memo">Mémoire de master en économétrie statistique · « Analyse des performances des partenaires D2D dans la vente des services FTTH : modélisation des facteurs explicatifs de la sous-performance »</p>
+      <p>Le constat de départ : aucun partenaire de vente porte-à-porte n'atteignait ses objectifs mensuels de ventes fibre, malgré les primes, la formation et les outils de suivi. J'ai analysé leurs ventes de janvier 2024 à juillet 2025 et modélisé les facteurs de la sous-performance. Les résultats ont servi à refaire le zonage des partenaires.</p>
+      <p class="notice" role="note"><b>Confidentialité.</b> Aucune donnée ni aucun nom de partenaire n'est publié. Les variables, la méthode et les métriques des modèles sont celles du mémoire. Le simulateur utilise des coefficients fictifs, à but d'illustration.</p>
     </div>
 
     <ol class="case-steps">
-      <li>
-        <span class="sn">Cadrer</span>
-        <h3>Définir la sous-performance</h3>
-        <p>Avec la direction commerciale : un partenaire est « sous-performant » s'il reste sous un seuil de réalisation de son objectif plusieurs mois de suite. Cette définition devient la variable cible du modèle.</p>
-      </li>
-      <li>
-        <span class="sn">Collecter</span>
-        <h3>Construire la base partenaires</h3>
-        <p>Historique des ventes et des objectifs, qualité des ventes, ressources de chaque partenaire, zones d'intervention et présence de la concurrence, consolidés en une table par partenaire et par mois.</p>
-      </li>
-      <li>
-        <span class="sn">Expliquer</span>
-        <h3>Choisir les variables</h3>
-        <p>Ancienneté, zone géographique, intensité concurrentielle de la zone, taille de l'équipe commerciale, rotation des commerciaux, qualité des ventes, tendance des ventes sur trois mois, formation déjà suivie.</p>
-      </li>
-      <li>
-        <span class="sn">Modéliser</span>
-        <h3>Régression logistique</h3>
-        <p>Un modèle volontairement interprétable : chaque coefficient se lit comme un facteur de risque, ce qui permet d'expliquer le résultat aux équipes métier et aux partenaires eux-mêmes.</p>
-      </li>
-      <li>
-        <span class="sn">Valider</span>
-        <h3>Tester sur des mois non vus</h3>
-        <p>Entraînement sur les mois passés, test sur les mois suivants, contrôle de l'AUC, de la matrice de confusion et du choix du seuil d'alerte avec le métier.</p>
-      </li>
-      <li>
-        <span class="sn">Décider</span>
-        <h3>Refaire le zonage</h3>
-        <p>Le score de risque a guidé la nouvelle répartition des zones et un plan de formation des partenaires les plus fragiles.</p>
-      </li>
-      <li>
-        <span class="sn">Suivre</span>
-        <h3>Recalculer chaque mois</h3>
-        <p>Les scores sont mis à jour automatiquement et intégrés au suivi des partenaires, pour vérifier l'effet du zonage et de la formation dans le temps.</p>
-      </li>
+      <li><span class="sn">Cadrer</span><h3>Poser la question</h3><p>Variable cible binaire : partenaire performant ou non performant. Objectif : expliquer la sous-performance et pouvoir l'anticiper.</p></li>
+      <li><span class="sn">Collecter</span><h3>Construire la base</h3><p>Extraction des ventes fibre, des objectifs et des informations partenaires (ancienneté, zone) depuis les systèmes internes, avec PostgreSQL.</p></li>
+      <li><span class="sn">Préparer</span><h3>Nettoyer et enrichir</h3><p>En R : valeurs manquantes, doublons, formats de dates, suppression des colonnes identifiantes, jointures pour ajouter ancienneté et localisation.</p></li>
+      <li><span class="sn">Explorer</span><h3>Profils et carte</h3><p>Analyse des profils de performance et de la volatilité des ventes, cartographie des clusters géographiques avec QGIS.</p></li>
+      <li><span class="sn">Expliquer</span><h3>Quatre variables</h3><p>Ancienneté en mois, fréquence de localisation (dynamisme de la zone), volatilité du taux de réalisation, nombre de concurrents dans la ville. Toutes standardisées.</p></li>
+      <li><span class="sn">Modéliser</span><h3>Trois modèles comparés</h3><p>Régression logistique, Random Forest et XGBoost. Découpage stratifié 70 / 30, rééquilibrage des classes par SMOTE, validation croisée à 5 plis.</p></li>
+      <li><span class="sn">Choisir</span><h3>Retenir la logistique</h3><p>Seul modèle à détecter réellement les partenaires performants, meilleur F1, et interprétable : chaque effet se traduit en décision.</p></li>
+      <li><span class="sn">Décider</span><h3>Zonage et formation</h3><p>Réaffectation des zones selon le profil des partenaires, et formation des équipes les moins performantes.</p></li>
     </ol>
 
     <div class="case-grid">
-      <figure class="case-card">
-        <figcaption><b>Ce qui fait varier le risque</b><span>coefficients standardisés · fictifs</span></figcaption>
-        <svg viewBox="0 0 420 270" class="coef" role="img" aria-label="Coefficients du modèle : la concurrence forte, la rotation des commerciaux et une zone Abidjan augmentent le risque ; la formation, la qualité des ventes, la taille de l'équipe, l'ancienneté et une tendance positive le réduisent.">
-          <line class="axis" x1="270" y1="10" x2="270" y2="250"/>
-          <g class="lbl">
-            <text x="150" y="264" text-anchor="middle">réduit le risque</text>
-            <text x="350" y="264" text-anchor="middle">augmente le risque</text>
-          </g>
-        </svg>
-      </figure>
+      <div class="case-card">
+        <div class="sim-head"><b>Ce que dit le modèle</b><span>effets estimés · régression logistique</span></div>
+        <ul class="effects">
+          <li><span class="eff up">▲▲</span><div><b>Fréquence de localisation</b><p>Effet fortement positif : les partenaires placés dans les zones dynamiques réussissent beaucoup plus souvent. L'affectation des zones est un levier immédiat.</p></div></li>
+          <li><span class="eff up">▲</span><div><b>Ancienneté</b><p>L'expérience améliore la performance : maîtrise des processus et connaissance du terrain.</p></div></li>
+          <li><span class="eff up">▲</span><div><b>Volatilité des ventes</b><p>Effet positif inattendu : des partenaires irréguliers mais capables de pics lors des campagnes.</p></div></li>
+          <li><span class="eff down">▼</span><div><b>Nombre de concurrents</b><p>La performance baisse dans les zones très disputées, qui demandent des profils plus aguerris.</p></div></li>
+        </ul>
+      </div>
 
       <div class="case-card sim" id="sim">
-        <div class="sim-head"><b>Simulateur de risque</b><span>modèle illustratif · coefficients fictifs</span></div>
-        <label for="s-anc">Ancienneté du partenaire <output id="o-anc">3 ans</output></label>
-        <input type="range" id="s-anc" min="0" max="10" step="1" value="3">
-        <label for="s-eff">Commerciaux sur le terrain <output id="o-eff">10</output></label>
-        <input type="range" id="s-eff" min="2" max="30" step="1" value="10">
-        <label for="s-tend">Tendance des ventes sur 3 mois <output id="o-tend">−10 %</output></label>
-        <input type="range" id="s-tend" min="-30" max="30" step="5" value="-10">
+        <div class="sim-head"><b>Simulateur</b><span>coefficients fictifs · illustration</span></div>
+        <label for="s-anc">Ancienneté du partenaire <output id="o-anc">12 mois</output></label>
+        <input type="range" id="s-anc" min="0" max="36" step="1" value="12">
+        <label for="s-conc">Concurrents dans la ville <output id="o-conc">3</output></label>
+        <input type="range" id="s-conc" min="0" max="8" step="1" value="3">
+        <label for="s-vol">Volatilité des ventes <output id="o-vol">0,30</output></label>
+        <input type="range" id="s-vol" min="0" max="1" step="0.05" value="0.3">
         <div class="toggles">
-          <label class="tg"><input type="checkbox" id="s-conc" checked> Zone à forte concurrence</label>
-          <label class="tg"><input type="checkbox" id="s-form"> Équipe déjà formée</label>
+          <label class="tg"><input type="checkbox" id="s-dyn"> Zone dynamique</label>
         </div>
         <div class="gauge"><i id="g-bar"></i></div>
         <div class="sim-out"><b id="g-val">–</b><span id="g-rec">–</span></div>
       </div>
     </div>
 
+    <div class="case-card models">
+      <div class="sim-head"><b>Comparaison des modèles</b><span>échantillon de test · résultats du mémoire</span></div>
+      <div class="table-wrap">
+        <table class="score">
+          <thead><tr><th>Modèle</th><th>Accuracy</th><th>Sensibilité</th><th>Spécificité</th><th>F1</th><th>AUC</th><th></th></tr></thead>
+          <tbody>
+            <tr class="kept"><td>Régression logistique</td><td>72,7 %</td><td>0,50</td><td>0,78</td><td>0,57</td><td>0,75</td><td><span class="pill ok">Retenu</span></td></tr>
+            <tr><td>Random Forest</td><td>≈ 82 %</td><td>0,20</td><td>0,90</td><td>0,32</td><td>0,78</td><td><span class="pill warn">Alerte</span></td></tr>
+            <tr><td>XGBoost</td><td>81,8 %</td><td>0,00</td><td>1,00</td><td>n.d.</td><td>0,89</td><td><span class="pill warn">Alerte</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="dash-note">XGBoost sépare le mieux les classes en théorie (AUC 0,89) mais ne détecte aucun partenaire performant au seuil de 0,5. Les modèles d'arbres restent utiles comme outils d'alerte sur les partenaires en difficulté.</p>
+    </div>
+
     <div class="zoning">
       <div class="zone-intro">
         <span class="q">La décision</span>
         <h3>Le bon partenaire dans la bonne zone</h3>
-        <p>Plutôt que de sanctionner les partenaires fragiles, le modèle a permis de les placer là où ils pouvaient progresser.</p>
+        <p>Plutôt que de sanctionner les partenaires fragiles, l'étude a permis de les placer là où ils pouvaient progresser.</p>
       </div>
       <div class="zone-map">
         <div class="zcol">
@@ -767,13 +767,14 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </div>
         <div class="zcol">
           <span class="zh">Zones moins concurrentielles et intérieur du pays</span>
-          <div class="zcard grow"><b>Partenaires à accompagner</b><p>Un marché plus accessible pour reprendre de l'élan, avec un plan de formation dédié.</p></div>
+          <div class="zcard grow"><b>Partenaires moins performants</b><p>Un marché plus accessible pour reprendre de l'élan, avec un accompagnement dédié.</p></div>
         </div>
       </div>
       <div class="zone-train">
-        <b>Formation des partenaires moins performants</b>
-        <p>J'ai pris l'initiative de former leurs équipes aux techniques de vente et aux bonnes pratiques observées chez les partenaires les plus performants.</p>
+        <b>Formation et transmission</b>
+        <p>J'ai pris l'initiative de former les équipes des partenaires moins performants aux techniques de vente et aux bonnes pratiques des partenaires performants. Le mémoire recommande aussi un mentorat des nouveaux entrants par les plus anciens et le ciblage des partenaires « irréguliers mais dynamiques » pour les campagnes.</p>
       </div>
+      <ul class="chips gold"><li>R</li><li>PostgreSQL</li><li>QGIS</li><li>Régression logistique</li><li>Random Forest</li><li>XGBoost</li><li>SMOTE</li><li>Validation croisée</li></ul>
     </div>
   </div>
 </section>
@@ -1104,33 +1105,21 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
   }));
 
 
-  // Coefficients du modèle (fictifs)
-  const COEF = [['Tendance 3 mois', -1.04], ['Ancienneté', -0.85], ['Taille de l\'équipe', -0.71], ['Qualité des ventes', -0.57], ['Formation suivie', -0.48], ['Zone Abidjan', 0.31], ['Rotation des commerciaux', 0.64], ['Concurrence forte', 0.92]];
-  const svg = document.querySelector('.coef'), NS = 'http://www.w3.org/2000/svg', cx = 270, k = 120 / 1.2;
-  COEF.forEach(([name, b], i) => {
-    const y = 18 + i * 29, w = Math.abs(b) * k;
-    const mk = (tag, attrs, txt) => { const e = document.createElementNS(NS, tag); for (const a in attrs) e.setAttribute(a, attrs[a]); if (txt) e.textContent = txt; svg.appendChild(e); return e; };
-    mk('rect', { x: b < 0 ? cx - w : cx, y, width: w, height: 16, rx: 3, class: b < 0 ? 'neg' : 'pos' });
-    mk('text', { x: b < 0 ? cx - w - 6 : cx - 6, y: y + 12, 'text-anchor': 'end', class: 'vname' }, b < 0 ? '' : name);
-    mk('text', { x: b < 0 ? cx + 6 : cx + w + 6, y: y + 12, class: b < 0 ? 'vname' : 'val' }, b < 0 ? name : '+' + b.toFixed(2).replace('.', ','));
-    mk('text', { x: b < 0 ? cx - w - 6 : 0, y: y + 12, 'text-anchor': 'end', class: 'val' }, b < 0 ? '−' + Math.abs(b).toFixed(2).replace('.', ',') : '');
-  });
-
-  // Simulateur (modèle illustratif, coefficients fictifs)
+  // Simulateur (coefficients fictifs, variables du mémoire)
   const $ = id => document.getElementById(id);
   const sim = () => {
-    const anc = +$('s-anc').value, eff = +$('s-eff').value, tend = +$('s-tend').value;
-    $('o-anc').textContent = anc + (anc > 1 ? ' ans' : ' an'); $('o-eff').textContent = eff;
-    $('o-tend').textContent = (tend > 0 ? '+' : tend < 0 ? '−' : '') + Math.abs(tend) + ' %';
-    const z = 0.9 - 0.35 * anc - 0.08 * eff - 0.04 * tend + ($('s-conc').checked ? 0.92 : 0) - ($('s-form').checked ? 0.48 : 0);
+    const anc = +$('s-anc').value, conc = +$('s-conc').value, vol = +$('s-vol').value;
+    $('o-anc').textContent = anc + ' mois'; $('o-conc').textContent = conc;
+    $('o-vol').textContent = vol.toFixed(2).replace('.', ',');
+    const z = -2.2 + 0.07 * anc - 0.35 * conc + 0.8 * vol + ($('s-dyn').checked ? 1.1 : 0);
     const p = 1 / (1 + Math.exp(-z));
-    $('g-val').textContent = Math.round(p * 100) + ' % de risque';
+    $('g-val').textContent = Math.round(p * 100) + ' % de chances d\'être performant';
     $('g-bar').style.left = (p * 100) + '%';
-    $('g-rec').textContent = p >= 0.6 ? 'Orienter vers une zone moins concurrentielle et lancer la formation de l\'équipe.'
-      : p >= 0.35 ? 'Suivi renforcé et partage des bonnes pratiques des meilleurs partenaires.'
-      : 'Partenaire solide : peut tenir une zone à forte concurrence.';
+    $('g-rec').textContent = p >= 0.6 ? 'Profil solide : peut tenir une zone à forte concurrence.'
+      : p >= 0.3 ? 'Accompagnement renforcé et mentorat par un partenaire expérimenté.'
+      : 'Orienter vers une zone moins concurrentielle ou l\'intérieur, et former l\'équipe aux techniques de vente.';
   };
-  ['s-anc', 's-eff', 's-tend', 's-conc', 's-form'].forEach(id => $(id).addEventListener('input', sim));
+  ['s-anc', 's-conc', 's-vol', 's-dyn'].forEach(id => $(id).addEventListener('input', sim));
   sim();
 
   // Galerie de tableaux de bord
