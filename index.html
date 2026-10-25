@@ -268,6 +268,10 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .scripts { display: grid; gap: 10px; min-width: 0; }
 .stabs { display: flex; gap: 6px; flex-wrap: wrap; }
 .stabs button { font-family: var(--mono); font-size: .74rem; border: 1px solid var(--line); background: var(--surface); color: var(--muted); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.stabs-h { font-family: var(--mono); font-size: .74rem; color: var(--lagoon); letter-spacing: .04em; }
+.stabs button { border-color: var(--lagoon) !important; color: var(--lagoon) !important; }
+.stabs button::before { content: "▸ "; }
+.stabs button[aria-selected="true"] { color: var(--band-ink) !important; border-color: var(--band) !important; }
 .stabs button[aria-selected="true"] { background: var(--band); color: var(--band-ink); border-color: var(--band); }
 .code[hidden] { display: none; }
 
@@ -599,7 +603,8 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
           </div>
         </div>
         <div class="scripts">
-        <div class="stabs" role="tablist" aria-label="Choisir un script"><button type="button" role="tab" aria-selected="true" aria-controls="s-rep">Reporting quotidien</button><button type="button" role="tab" aria-selected="false" aria-controls="s-seg">Segmentation campagnes fibre</button><button type="button" role="tab" aria-selected="false" aria-controls="s-maj">Mise à jour d'un reporting Excel</button></div>
+        <p class="stabs-h">3 scripts à découvrir · touchez un onglet pour changer de script</p>
+        <div class="stabs" role="tablist" aria-label="Choisir un script"><button type="button" role="tab" aria-selected="true" aria-controls="s-rep">Reporting quotidien</button><button type="button" role="tab" aria-selected="false" aria-controls="s-seg">Segmentation campagnes fibre</button><button type="button" role="tab" aria-selected="false" aria-controls="s-maj" id="script-excel">Mise à jour d'un reporting Excel</button></div>
         <figure class="code" id="s-rep" aria-label="Extrait type d'un script de reporting automatisé en R">
           <figcaption><span>reporting_quotidien.R · extrait type</span><button type="button" class="run" data-log="log">▶ Exécuter</button></figcaption>
 <pre><code><span class="c"># Reporting quotidien : extraire, consolider, contrôler, publier</span>
@@ -1143,6 +1148,8 @@ xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)   
   stabs.forEach(t => t.addEventListener('click', () => {
     stabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', on); document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
   }));
+  const deep = location.hash && document.querySelector('.stabs ' + location.hash);
+  if (deep) { deep.click(); deep.scrollIntoView({ block: 'center' }); }
 
 
   // Simulateur (coefficients fictifs, variables du projet)
