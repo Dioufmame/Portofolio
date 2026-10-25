@@ -278,6 +278,55 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .train p { color: var(--muted); }
 @media (max-width: 900px) { .train { grid-template-columns: 1fr; } }
 
+
+/* Étude de cas */
+.case-section { padding-top: 0; }
+.case-head { display: grid; gap: 16px; max-width: 760px; margin-bottom: 40px; }
+.case-head > p:not(.notice) { color: var(--muted); font-size: 1.08rem; }
+.case-steps { list-style: none; margin: 0 0 32px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; counter-reset: cs; }
+.case-steps li { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 8px; align-content: start; }
+.case-steps .sn { font-family: var(--mono); font-size: .74rem; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; }
+.case-steps .sn::before { counter-increment: cs; content: counter(cs) " · "; }
+.case-steps h3 { font-size: 1.08rem; }
+.case-steps p { color: var(--muted); font-size: .92rem; }
+.case-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.case-card { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.case-card figcaption, .sim-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.case-card figcaption b, .sim-head b { font-family: var(--display); font-size: 1.1rem; }
+.case-card figcaption span, .sim-head span { font-family: var(--mono); font-size: .68rem; color: var(--muted); }
+.coef { width: 100%; height: auto; display: block; }
+.coef .axis { stroke: var(--muted); stroke-width: 1; }
+.coef .lbl text, .coef .vname { fill: var(--muted); font-family: var(--mono); font-size: 10px; }
+.coef .vname { fill: var(--ink); font-family: var(--body); font-size: 11px; }
+.coef .pos { fill: var(--bad); } .coef .neg { fill: var(--lagoon); }
+.coef .val { fill: var(--muted); font-family: var(--mono); font-size: 9.5px; }
+.sim label { display: flex; justify-content: space-between; gap: 10px; font-size: .9rem; color: var(--muted); }
+.sim output { font-family: var(--mono); color: var(--ink); font-weight: 500; }
+.sim input[type=range] { width: 100%; accent-color: var(--lagoon); margin: -6px 0 4px; }
+.toggles { display: flex; flex-wrap: wrap; gap: 8px; }
+.sim .tg { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; color: var(--ink); font-size: .86rem; }
+.sim .tg input { accent-color: var(--lagoon); }
+.gauge { height: 12px; border-radius: 6px; background: linear-gradient(90deg, var(--lagoon) 0 35%, var(--gold) 35% 60%, var(--bad) 60% 100%); position: relative; opacity: .9; }
+.gauge i { position: absolute; top: -5px; width: 4px; height: 22px; background: var(--ink); border-radius: 2px; transform: translateX(-2px); transition: left .3s ease; }
+.sim-out { display: grid; gap: 4px; }
+.sim-out b { font-family: var(--display); font-size: 2.2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.sim-out span { color: var(--muted); font-size: .92rem; }
+.zoning { background: var(--band); color: var(--band-ink); border-radius: 22px; padding: clamp(24px, 3.5vw, 40px); display: grid; gap: 24px; }
+.zone-intro { display: grid; gap: 8px; max-width: 640px; }
+.zoning .q { color: var(--gold); }
+.zone-intro h3 { font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 800; }
+.zone-intro p, .zcard p, .zone-train p { color: var(--band-muted); }
+.zone-map { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.zcol { display: grid; gap: 10px; align-content: start; }
+.zh { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--band-muted); }
+.zcard { border-radius: 14px; padding: 18px; display: grid; gap: 6px; border: 1px solid color-mix(in srgb, var(--band-ink) 14%, transparent); }
+.zcard b { font-family: var(--display); font-size: 1.15rem; }
+.zcard.strong { border-top: 3px solid var(--gold); }
+.zcard.grow { border-top: 3px solid #4cb9d6; }
+.zone-train { border-left: 3px solid var(--gold); padding-left: 16px; display: grid; gap: 4px; }
+.zone-train b { font-family: var(--display); }
+@media (max-width: 900px) { .case-grid, .zone-map { grid-template-columns: 1fr; } }
+
 /* Galerie de dashboards */
 .notice { max-width: 720px; font-size: .92rem; color: var(--ink); background: var(--gold-soft); border-left: 3px solid var(--gold); border-radius: 0 10px 10px 0; padding: 12px 16px; }
 .notice b { color: var(--gold); }
@@ -408,6 +457,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
       <li><a href="#ingenierie">Ingénierie</a></li>
       <li><a href="#automatisation">Automatisation</a></li>
       <li><a href="#analyse">Analyse</a></li>
+      <li><a href="#cas">Étude de cas</a></li>
       <li><a href="#dashboards">Dashboards</a></li>
       <li><a href="#projets">Projets</a></li>
       <li><a href="#parcours">Parcours</a></li>
@@ -611,7 +661,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         <ul class="ticks">
           <li><b>Churn et rétention</b> : lien entre signalisations clients et résiliation, causes principales, actions correctives ciblées.</li>
           <li><b>Segmentation client</b> pour des campagnes marketing ciblées sur le parc fibre.</li>
-          <li><b>Modèle prédictif</b> qui détecte les partenaires de vente terrain en passe de sous-performer, pour un pilotage individualisé.</li>
+          <li><b>Modèle de régression logistique</b> qui détecte les partenaires de vente en passe de sous-performer et a servi à refaire le zonage commercial (<a href="#cas">voir l'étude de cas</a>).</li>
           <li><b>Prévisions et simulations</b> des ventes partenaires Door To Door pour repérer les écarts avant la fin du mois.</li>
           <li><b>Data mining sur les CRM</b> pour isoler les clients à fort potentiel de réachat et orienter les campagnes les plus rentables.</li>
         </ul>
@@ -625,6 +675,106 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </div>
       </div>
     </article>
+  </div>
+</section>
+
+<section class="case-section" id="cas">
+  <div class="wrap">
+    <div class="case-head">
+      <span class="label">Étude de cas · Orange CI</span>
+      <h2>Prédire les partenaires en difficulté, puis redessiner la carte des ventes.</h2>
+      <p>J'ai construit un modèle de régression logistique qui repère les partenaires de vente terrain en passe de sous-performer. Ses résultats ont servi à refaire le zonage : chaque partenaire a été placé là où il avait le plus de chances de réussir.</p>
+      <p class="notice" role="note"><b>Données fictives.</b> Les variables et la démarche reflètent le projet réel. Les coefficients, scores et métriques affichés sur cette section sont inventés pour l'illustration.</p>
+    </div>
+
+    <ol class="case-steps">
+      <li>
+        <span class="sn">Cadrer</span>
+        <h3>Définir la sous-performance</h3>
+        <p>Avec la direction commerciale : un partenaire est « sous-performant » s'il reste sous un seuil de réalisation de son objectif plusieurs mois de suite. Cette définition devient la variable cible du modèle.</p>
+      </li>
+      <li>
+        <span class="sn">Collecter</span>
+        <h3>Construire la base partenaires</h3>
+        <p>Historique des ventes et des objectifs, qualité des ventes, ressources de chaque partenaire, zones d'intervention et présence de la concurrence, consolidés en une table par partenaire et par mois.</p>
+      </li>
+      <li>
+        <span class="sn">Expliquer</span>
+        <h3>Choisir les variables</h3>
+        <p>Ancienneté, zone géographique, intensité concurrentielle de la zone, taille de l'équipe commerciale, rotation des commerciaux, qualité des ventes, tendance des ventes sur trois mois, formation déjà suivie.</p>
+      </li>
+      <li>
+        <span class="sn">Modéliser</span>
+        <h3>Régression logistique</h3>
+        <p>Un modèle volontairement interprétable : chaque coefficient se lit comme un facteur de risque, ce qui permet d'expliquer le résultat aux équipes métier et aux partenaires eux-mêmes.</p>
+      </li>
+      <li>
+        <span class="sn">Valider</span>
+        <h3>Tester sur des mois non vus</h3>
+        <p>Entraînement sur les mois passés, test sur les mois suivants, contrôle de l'AUC, de la matrice de confusion et du choix du seuil d'alerte avec le métier.</p>
+      </li>
+      <li>
+        <span class="sn">Décider</span>
+        <h3>Refaire le zonage</h3>
+        <p>Le score de risque a guidé la nouvelle répartition des zones et un plan de formation des partenaires les plus fragiles.</p>
+      </li>
+      <li>
+        <span class="sn">Suivre</span>
+        <h3>Recalculer chaque mois</h3>
+        <p>Les scores sont mis à jour automatiquement et intégrés au suivi des partenaires, pour vérifier l'effet du zonage et de la formation dans le temps.</p>
+      </li>
+    </ol>
+
+    <div class="case-grid">
+      <figure class="case-card">
+        <figcaption><b>Ce qui fait varier le risque</b><span>coefficients standardisés · fictifs</span></figcaption>
+        <svg viewBox="0 0 420 270" class="coef" role="img" aria-label="Coefficients du modèle : la concurrence forte, la rotation des commerciaux et une zone Abidjan augmentent le risque ; la formation, la qualité des ventes, la taille de l'équipe, l'ancienneté et une tendance positive le réduisent.">
+          <line class="axis" x1="270" y1="10" x2="270" y2="250"/>
+          <g class="lbl">
+            <text x="150" y="264" text-anchor="middle">réduit le risque</text>
+            <text x="350" y="264" text-anchor="middle">augmente le risque</text>
+          </g>
+        </svg>
+      </figure>
+
+      <div class="case-card sim" id="sim">
+        <div class="sim-head"><b>Simulateur de risque</b><span>modèle illustratif · coefficients fictifs</span></div>
+        <label for="s-anc">Ancienneté du partenaire <output id="o-anc">3 ans</output></label>
+        <input type="range" id="s-anc" min="0" max="10" step="1" value="3">
+        <label for="s-eff">Commerciaux sur le terrain <output id="o-eff">10</output></label>
+        <input type="range" id="s-eff" min="2" max="30" step="1" value="10">
+        <label for="s-tend">Tendance des ventes sur 3 mois <output id="o-tend">−10 %</output></label>
+        <input type="range" id="s-tend" min="-30" max="30" step="5" value="-10">
+        <div class="toggles">
+          <label class="tg"><input type="checkbox" id="s-conc" checked> Zone à forte concurrence</label>
+          <label class="tg"><input type="checkbox" id="s-form"> Équipe déjà formée</label>
+        </div>
+        <div class="gauge"><i id="g-bar"></i></div>
+        <div class="sim-out"><b id="g-val">–</b><span id="g-rec">–</span></div>
+      </div>
+    </div>
+
+    <div class="zoning">
+      <div class="zone-intro">
+        <span class="q">La décision</span>
+        <h3>Le bon partenaire dans la bonne zone</h3>
+        <p>Plutôt que de sanctionner les partenaires fragiles, le modèle a permis de les placer là où ils pouvaient progresser.</p>
+      </div>
+      <div class="zone-map">
+        <div class="zcol">
+          <span class="zh">Zones à forte concurrence</span>
+          <div class="zcard strong"><b>Partenaires expérimentés</b><p>Plus d'ancienneté, des équipes et des ressources suffisantes pour tenir face à la concurrence.</p></div>
+        </div>
+        <div class="zcol">
+          <span class="zh">Zones moins concurrentielles et intérieur du pays</span>
+          <div class="zcard grow"><b>Partenaires à accompagner</b><p>Un marché plus accessible pour reprendre de l'élan, avec un plan de formation dédié.</p></div>
+        </div>
+      </div>
+      <div class="zone-train">
+        <b>Formation des partenaires moins performants</b>
+        <p>J'ai pris l'initiative de former leurs équipes aux techniques de vente et aux bonnes pratiques observées chez les partenaires les plus performants.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -952,6 +1102,36 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
   stabs.forEach(t => t.addEventListener('click', () => {
     stabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', on); document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
   }));
+
+
+  // Coefficients du modèle (fictifs)
+  const COEF = [['Tendance 3 mois', -1.04], ['Ancienneté', -0.85], ['Taille de l\'équipe', -0.71], ['Qualité des ventes', -0.57], ['Formation suivie', -0.48], ['Zone Abidjan', 0.31], ['Rotation des commerciaux', 0.64], ['Concurrence forte', 0.92]];
+  const svg = document.querySelector('.coef'), NS = 'http://www.w3.org/2000/svg', cx = 270, k = 120 / 1.2;
+  COEF.forEach(([name, b], i) => {
+    const y = 18 + i * 29, w = Math.abs(b) * k;
+    const mk = (tag, attrs, txt) => { const e = document.createElementNS(NS, tag); for (const a in attrs) e.setAttribute(a, attrs[a]); if (txt) e.textContent = txt; svg.appendChild(e); return e; };
+    mk('rect', { x: b < 0 ? cx - w : cx, y, width: w, height: 16, rx: 3, class: b < 0 ? 'neg' : 'pos' });
+    mk('text', { x: b < 0 ? cx - w - 6 : cx - 6, y: y + 12, 'text-anchor': 'end', class: 'vname' }, b < 0 ? '' : name);
+    mk('text', { x: b < 0 ? cx + 6 : cx + w + 6, y: y + 12, class: b < 0 ? 'vname' : 'val' }, b < 0 ? name : '+' + b.toFixed(2).replace('.', ','));
+    mk('text', { x: b < 0 ? cx - w - 6 : 0, y: y + 12, 'text-anchor': 'end', class: 'val' }, b < 0 ? '−' + Math.abs(b).toFixed(2).replace('.', ',') : '');
+  });
+
+  // Simulateur (modèle illustratif, coefficients fictifs)
+  const $ = id => document.getElementById(id);
+  const sim = () => {
+    const anc = +$('s-anc').value, eff = +$('s-eff').value, tend = +$('s-tend').value;
+    $('o-anc').textContent = anc + (anc > 1 ? ' ans' : ' an'); $('o-eff').textContent = eff;
+    $('o-tend').textContent = (tend > 0 ? '+' : tend < 0 ? '−' : '') + Math.abs(tend) + ' %';
+    const z = 0.9 - 0.35 * anc - 0.08 * eff - 0.04 * tend + ($('s-conc').checked ? 0.92 : 0) - ($('s-form').checked ? 0.48 : 0);
+    const p = 1 / (1 + Math.exp(-z));
+    $('g-val').textContent = Math.round(p * 100) + ' % de risque';
+    $('g-bar').style.left = (p * 100) + '%';
+    $('g-rec').textContent = p >= 0.6 ? 'Orienter vers une zone moins concurrentielle et lancer la formation de l\'équipe.'
+      : p >= 0.35 ? 'Suivi renforcé et partage des bonnes pratiques des meilleurs partenaires.'
+      : 'Partenaire solide : peut tenir une zone à forte concurrence.';
+  };
+  ['s-anc', 's-eff', 's-tend', 's-conc', 's-form'].forEach(id => $(id).addEventListener('input', sim));
+  sim();
 
   // Galerie de tableaux de bord
   const gtabs = [...document.querySelectorAll('.gtabs [role=tab]')];
