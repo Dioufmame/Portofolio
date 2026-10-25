@@ -705,11 +705,11 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
       <li><span class="sn">Cadrer</span><h3>Poser la question</h3><p>Variable cible binaire : partenaire performant ou non performant. Objectif : expliquer la sous-performance et pouvoir l'anticiper.</p></li>
       <li><span class="sn">Collecter</span><h3>Construire la base</h3><p>Extraction des ventes fibre, des objectifs et des informations partenaires (ancienneté, zone) depuis les systèmes internes, avec PostgreSQL.</p></li>
       <li><span class="sn">Préparer</span><h3>Nettoyer et enrichir</h3><p>En R : valeurs manquantes, doublons, formats de dates, suppression des colonnes identifiantes, jointures pour ajouter ancienneté et localisation.</p></li>
-      <li><span class="sn">Explorer</span><h3>Profils et carte</h3><p>Analyse des profils de performance et de la volatilité des ventes, cartographie des clusters géographiques avec QGIS.</p></li>
+      <li><span class="sn">Explorer</span><h3>Profils et carte</h3><p>Analyse des tendances et de la volatilité des ventes sur 18 mois, profils de performance, cartographie des clusters géographiques avec QGIS.</p></li>
       <li><span class="sn">Expliquer</span><h3>Quatre variables</h3><p>Ancienneté en mois, fréquence de localisation (dynamisme de la zone), volatilité du taux de réalisation, nombre de concurrents dans la ville. Toutes standardisées.</p></li>
       <li><span class="sn">Modéliser</span><h3>Trois modèles comparés</h3><p>Régression logistique, Random Forest et XGBoost. Découpage stratifié 70 / 30, rééquilibrage des classes par SMOTE, validation croisée à 5 plis.</p></li>
       <li><span class="sn">Choisir</span><h3>Retenir la logistique</h3><p>Seul modèle à détecter réellement les partenaires performants, meilleur F1, et interprétable : chaque effet se traduit en décision.</p></li>
-      <li><span class="sn">Décider</span><h3>Zonage et formation</h3><p>Réaffectation des zones selon le profil des partenaires, et formation des équipes les moins performantes.</p></li>
+      <li><span class="sn">Décider</span><h3>Zonage et formation</h3><p>Réaffectation des zones selon le profil des partenaires. Les moins performants ont ensuite été formés via l'école de la fibre.</p></li>
     </ol>
 
     <div class="case-grid">
@@ -767,12 +767,12 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </div>
         <div class="zcol">
           <span class="zh">Zones moins concurrentielles et intérieur du pays</span>
-          <div class="zcard grow"><b>Partenaires moins performants</b><p>Un marché plus accessible pour reprendre de l'élan, avec un accompagnement dédié.</p></div>
+          <div class="zcard grow"><b>Partenaires moins performants</b><p>Un marché plus accessible pour reprendre de l'élan, avec une formation dédiée.</p></div>
         </div>
       </div>
       <div class="zone-train">
-        <b>Formation et transmission</b>
-        <p>J'ai pris l'initiative de former les équipes des partenaires moins performants aux techniques de vente et aux bonnes pratiques des partenaires performants. J'ai aussi recommandé un mentorat des nouveaux entrants par les plus anciens et le ciblage des partenaires « irréguliers mais dynamiques » pour les campagnes.</p>
+        <b>Formation via l'école de la fibre</b>
+        <p>À la demande du manager senior, les partenaires moins performants ont été formés via l'école de la fibre aux techniques de vente et aux bonnes pratiques des partenaires performants. J'ai aussi recommandé un mentorat des nouveaux entrants par les plus anciens et le ciblage des partenaires « irréguliers mais dynamiques » pour les campagnes.</p>
       </div>
       <ul class="chips gold"><li>R</li><li>PostgreSQL</li><li>QGIS</li><li>Régression logistique</li><li>Random Forest</li><li>XGBoost</li><li>SMOTE</li><li>Validation croisée</li></ul>
     </div>
