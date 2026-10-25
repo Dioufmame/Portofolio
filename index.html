@@ -674,7 +674,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         <ul class="ticks">
           <li><b>Churn et rétention</b> : lien entre signalisations clients et résiliation, causes principales, actions correctives ciblées.</li>
           <li><b>Segmentation client</b> pour des campagnes marketing ciblées sur le parc fibre.</li>
-          <li><b>Modèle de régression logistique</b> qui détecte les partenaires de vente en passe de sous-performer et a servi à refaire le zonage commercial, issu de mon mémoire de master (<a href="#cas">voir l'étude de cas</a>).</li>
+          <li><b>Modèle de régression logistique</b> qui détecte les partenaires de vente en passe de sous-performer et a servi à refaire le zonage commercial (<a href="#cas">voir l'étude de cas</a>).</li>
           <li><b>Prévisions et simulations</b> des ventes partenaires Door To Door pour repérer les écarts avant la fin du mois.</li>
           <li><b>Data mining sur les CRM</b> pour isoler les clients à fort potentiel de réachat et orienter les campagnes les plus rentables.</li>
         </ul>
@@ -694,11 +694,11 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
 <section class="case-section" id="cas">
   <div class="wrap">
     <div class="case-head">
-      <span class="label">Étude de cas · Mémoire de master, réalisé chez Orange CI</span>
+      <span class="label">Étude de cas · Orange CI</span>
       <h2>Comprendre pourquoi des partenaires de vente décrochent, puis redessiner la carte.</h2>
-      <p class="memo">Mémoire de master en économétrie statistique · « Analyse des performances des partenaires D2D dans la vente des services FTTH : modélisation des facteurs explicatifs de la sous-performance »</p>
+      <p class="memo">Projet · Analyse des performances des partenaires porte-à-porte dans la vente fibre et modélisation des facteurs de la sous-performance</p>
       <p>Le constat de départ : aucun partenaire de vente porte-à-porte n'atteignait ses objectifs mensuels de ventes fibre, malgré les primes, la formation et les outils de suivi. J'ai analysé leurs ventes de janvier 2024 à juillet 2025 et modélisé les facteurs de la sous-performance. Les résultats ont servi à refaire le zonage des partenaires.</p>
-      <p class="notice" role="note"><b>Confidentialité.</b> Aucune donnée ni aucun nom de partenaire n'est publié. Les variables, la méthode et les métriques des modèles sont celles du mémoire. Le simulateur utilise des coefficients fictifs, à but d'illustration.</p>
+      <p class="notice" role="note"><b>Confidentialité.</b> Aucune donnée ni aucun nom de partenaire n'est publié. Les variables, la méthode et les métriques des modèles sont celles du projet réel. Le simulateur utilise des coefficients fictifs, à but d'illustration.</p>
     </div>
 
     <ol class="case-steps">
@@ -740,7 +740,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
     </div>
 
     <div class="case-card models">
-      <div class="sim-head"><b>Comparaison des modèles</b><span>échantillon de test · résultats du mémoire</span></div>
+      <div class="sim-head"><b>Comparaison des modèles</b><span>échantillon de test · résultats du projet</span></div>
       <div class="table-wrap">
         <table class="score">
           <thead><tr><th>Modèle</th><th>Accuracy</th><th>Sensibilité</th><th>Spécificité</th><th>F1</th><th>AUC</th><th></th></tr></thead>
@@ -772,7 +772,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
       </div>
       <div class="zone-train">
         <b>Formation et transmission</b>
-        <p>J'ai pris l'initiative de former les équipes des partenaires moins performants aux techniques de vente et aux bonnes pratiques des partenaires performants. Le mémoire recommande aussi un mentorat des nouveaux entrants par les plus anciens et le ciblage des partenaires « irréguliers mais dynamiques » pour les campagnes.</p>
+        <p>J'ai pris l'initiative de former les équipes des partenaires moins performants aux techniques de vente et aux bonnes pratiques des partenaires performants. J'ai aussi recommandé un mentorat des nouveaux entrants par les plus anciens et le ciblage des partenaires « irréguliers mais dynamiques » pour les campagnes.</p>
       </div>
       <ul class="chips gold"><li>R</li><li>PostgreSQL</li><li>QGIS</li><li>Régression logistique</li><li>Random Forest</li><li>XGBoost</li><li>SMOTE</li><li>Validation croisée</li></ul>
     </div>
@@ -1105,7 +1105,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
   }));
 
 
-  // Simulateur (coefficients fictifs, variables du mémoire)
+  // Simulateur (coefficients fictifs, variables du projet)
   const $ = id => document.getElementById(id);
   const sim = () => {
     const anc = +$('s-anc').value, conc = +$('s-conc').value, vol = +$('s-vol').value;
