@@ -325,6 +325,10 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .zcard.grow { border-top: 3px solid #4cb9d6; }
 .zone-train { border-left: 3px solid var(--gold); padding-left: 16px; display: grid; gap: 4px; }
 .zone-train b { font-family: var(--display); }
+.train-impact { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+.train-impact li { color: var(--band-muted); padding-left: 22px; position: relative; }
+.train-impact li::before { content: "✓"; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+.train-impact li b { color: inherit; font-family: inherit; font-weight: 600; }
 @media (max-width: 900px) { .case-grid, .zone-map { grid-template-columns: 1fr; } }
 
 
@@ -709,7 +713,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
       <li><span class="sn">Expliquer</span><h3>Quatre variables</h3><p>Ancienneté en mois, fréquence de localisation (dynamisme de la zone), volatilité du taux de réalisation, nombre de concurrents dans la ville. Toutes standardisées.</p></li>
       <li><span class="sn">Modéliser</span><h3>Trois modèles comparés</h3><p>Régression logistique, Random Forest et XGBoost. Découpage stratifié 70 / 30, rééquilibrage des classes par SMOTE, validation croisée à 5 plis.</p></li>
       <li><span class="sn">Choisir</span><h3>Retenir la logistique</h3><p>Seul modèle à détecter réellement les partenaires performants, meilleur F1, et interprétable : chaque effet se traduit en décision.</p></li>
-      <li><span class="sn">Décider</span><h3>Zonage et formation</h3><p>Réaffectation des zones selon le profil des partenaires. Les moins performants ont ensuite été formés via l'école de la fibre.</p></li>
+      <li><span class="sn">Décider</span><h3>Zonage et formation</h3><p>Réaffectation des zones selon le profil des partenaires. Les moins performants ont ensuite été formés via l'école de la fibre, avec des ventes de meilleure qualité à la clé.</p></li>
     </ol>
 
     <div class="case-grid">
@@ -773,6 +777,14 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
       <div class="zone-train">
         <b>Formation via l'école de la fibre</b>
         <p>À la demande du manager senior, les partenaires moins performants ont été formés via l'école de la fibre aux techniques de vente et aux bonnes pratiques des partenaires performants. J'ai aussi recommandé un mentorat des nouveaux entrants par les plus anciens et le ciblage des partenaires « irréguliers mais dynamiques » pour les campagnes.</p>
+        <b>Ce que la formation a changé</b>
+        <ul class="train-impact">
+          <li>Des ventes de meilleure qualité, réalisées dans des zones effectivement couvertes par la fibre.</li>
+          <li>Une localisation du client bien relevée, qui facilite la planification des techniciens et l'installation.</li>
+          <li>Moins d'instances commerciales.</li>
+          <li>Moins de pénalités liées aux mauvaises ventes des partenaires.</li>
+          <li>Une meilleure expérience client.</li>
+        </ul>
       </div>
       <ul class="chips gold"><li>R</li><li>PostgreSQL</li><li>QGIS</li><li>Régression logistique</li><li>Random Forest</li><li>XGBoost</li><li>SMOTE</li><li>Validation croisée</li></ul>
     </div>
