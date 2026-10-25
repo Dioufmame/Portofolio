@@ -664,34 +664,23 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
           </div>
         </figure>
         <figure class="code" id="s-maj" aria-label="Extrait anonymisé du script de mise à jour automatique d'un reporting Excel" hidden>
-          <figcaption><span>maj_reporting_campagnes.R · extrait anonymisé</span><button type="button" class="run" data-log="log-maj">▶ Exécuter</button></figcaption>
-<pre><code><span class="c"># Tâche planifiée à 9 h : le template Excel (Power Query déjà en place)</span>
-<span class="c"># n'est JAMAIS modifié dans sa structure, seules ses données avancent.</span>
-<span class="c"># Modes : --test (dossier labo) · --dry-run (R seul) · --relancer (rejoue le jour)</span>
-jour_ref <span class="o">&lt;-</span> <span class="f">jour_ouvre_precedent</span>(<span class="f">Sys.Date</span>())   <span class="c"># J-1, le lundi : vendredi</span>
+          <figcaption><span>maj_reporting_excel.R · extrait type</span><button type="button" class="run" data-log="log-maj">▶ Exécuter</button></figcaption>
+<pre><code><span class="c"># Mise à jour du reporting : collecter, ajouter, actualiser, envoyer</span>
+nouveau <span class="o">&lt;-</span> <span class="f">lire_base_du_jour</span>(jour_ref) <span class="o">|&gt;</span>   <span class="c"># J-1, le lundi : vendredi</span>
+  <span class="f">anti_join</span>(<span class="f">deja_presentes</span>(template), by = <span class="s">"id_contact"</span>)
 
-<span class="c"># 1. Collecte : pièces jointes du jour (IMAP) et bases prétraitées (SFTP)</span>
-<span class="f">recuperer_pieces_jointes</span>(expediteurs, dossier = <span class="s">"entrees/"</span>)
-<span class="f">telecharger_sftp</span>(<span class="s">"bases_pretraitees/"</span>, dossier = <span class="s">"entrees/"</span>)
+xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)   <span class="c"># structure jamais modifiée</span>
+<span class="f">ajouter_lignes</span>(xl, <span class="s">"DATA"</span>, nouveau)
+<span class="f">etirer_formules</span>(xl, <span class="s">"DATA"</span>)
+<span class="f">actualiser_tout</span>(xl)   <span class="c"># Power Query + tableaux croisés</span>
 
-<span class="c"># 2. Préparation en R : seules les lignes absentes du template</span>
-nouveau <span class="o">&lt;-</span> <span class="f">lire_base_du_jour</span>(jour_ref) <span class="o">|&gt;</span>
-  <span class="f">anti_join</span>(<span class="f">lignes_deja_presentes</span>(template), by = <span class="s">"id_contact"</span>) <span class="o">|&gt;</span>
-  <span class="f">rattacher_campagne</span>(table_correspondance)
+<span class="f">stopifnot</span>(<span class="f">aucune_erreur</span>(xl),   <span class="c"># pas d'envoi si un chiffre</span>
+          <span class="f">totaux_ok</span>(xl, nouveau))  <span class="c"># est douteux</span>
 
-<span class="c"># 3. Excel piloté par R : ajout à la suite, formules étirées, actualisation</span>
-xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)
-<span class="f">ajouter_lignes</span>(xl, onglet = <span class="s">"DATA_CRM"</span>, nouveau)
-<span class="f">etirer_formules</span>(xl, onglet = <span class="s">"DATA_CRM"</span>)
-<span class="f">actualiser_tout</span>(xl)   <span class="c"># requêtes Power Query + tableaux croisés</span>
+<span class="f">copie_en_valeurs</span>(xl) <span class="o">|&gt;</span>
+  <span class="f">envoyer_mail</span>(destinataires)
 
-<span class="c"># 4. Contrôles bloquants : pas d'envoi si un chiffre est douteux</span>
-<span class="f">stopifnot</span>(<span class="f">aucune_erreur_excel</span>(xl), <span class="f">totaux_coherents</span>(xl, nouveau))
-
-<span class="c"># 5. Sauvegarde, copie figée en valeurs, envoi</span>
-<span class="f">sauvegarder</span>(template, garder_jours = <span class="n">15</span>)
-envoi <span class="o">&lt;-</span> <span class="f">copie_en_valeurs</span>(xl, <span class="f">glue</span>(<span class="s">"Reporting_{format(jour_ref, '%d-%m-%Y')}.xlsx"</span>))
-<span class="f">envoyer_mail</span>(destinataires, pieces = envoi)</code></pre>
+<span class="f">log_info</span>(<span class="s">"{nrow(nouveau)} lignes ajoutées"</span>)</code></pre>
           <div class="log" id="log-maj" aria-live="polite">
             <div><time>09:00:03</time> pièces jointes du jour et bases prétraitées récupérées <em>ok</em></div>
             <div><time>09:00:41</time> 1 284 nouvelles lignes préparées, aucune en double <em>ok</em></div>
