@@ -695,7 +695,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
   <div class="wrap">
     <div class="case-head">
       <span class="label">Étude de cas · Orange CI</span>
-      <h2>Comprendre pourquoi des partenaires de vente décrochent, puis redessiner la carte.</h2>
+      <h2>Prédire la sous-performance des partenaires de vente, et leur attribuer les zones où ils gagnent.</h2>
       <p class="memo">Projet · Analyse des performances des partenaires porte-à-porte dans la vente fibre et modélisation des facteurs de la sous-performance</p>
       <p>Le constat de départ : aucun partenaire de vente porte-à-porte n'atteignait ses objectifs mensuels de ventes fibre, malgré les primes, la formation et les outils de suivi. J'ai analysé leurs ventes de janvier 2024 à juillet 2025 et modélisé les facteurs de la sous-performance. Les résultats ont servi à refaire le zonage des partenaires.</p>
       <p class="notice" role="note"><b>Confidentialité.</b> Aucune donnée ni aucun nom de partenaire n'est publié. Les variables, la méthode et les métriques des modèles sont celles du projet réel. Le simulateur utilise des coefficients fictifs, à but d'illustration.</p>
@@ -703,7 +703,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
 
     <ol class="case-steps">
       <li><span class="sn">Cadrer</span><h3>Poser la question</h3><p>Variable cible binaire : partenaire performant ou non performant. Objectif : expliquer la sous-performance et pouvoir l'anticiper.</p></li>
-      <li><span class="sn">Collecter</span><h3>Construire la base</h3><p>Extraction des ventes fibre, des objectifs et des informations partenaires (ancienneté, zone) depuis les systèmes internes, avec PostgreSQL.</p></li>
+      <li><span class="sn">Collecter</span><h3>Construire la base</h3><p>Extraction des ventes fibre, des objectifs et des informations partenaires depuis les systèmes internes.</p></li>
       <li><span class="sn">Préparer</span><h3>Nettoyer et enrichir</h3><p>En R : valeurs manquantes, doublons, formats de dates, suppression des colonnes identifiantes, jointures pour ajouter ancienneté et localisation.</p></li>
       <li><span class="sn">Explorer</span><h3>Profils et carte</h3><p>Analyse des tendances et de la volatilité des ventes sur 18 mois, profils de performance, cartographie des clusters géographiques avec QGIS.</p></li>
       <li><span class="sn">Expliquer</span><h3>Quatre variables</h3><p>Ancienneté en mois, fréquence de localisation (dynamisme de la zone), volatilité du taux de réalisation, nombre de concurrents dans la ville. Toutes standardisées.</p></li>
