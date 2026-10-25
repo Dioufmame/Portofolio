@@ -254,7 +254,8 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .chain li:not(:last-child)::after { content: "›"; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); color: var(--muted); }
 .coord-section { padding-top: 0; }
 .coord-section .wrap > .pillar-head { margin-bottom: 32px; }
-.coord-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.coord-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1100px) { .coord-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .coord { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--lagoon); border-radius: 14px; padding: 22px; display: grid; gap: 8px; align-content: start; }
 .coord:nth-child(even) { border-top-color: var(--gold); }
 .coord .ctx { font-family: var(--mono); font-size: .72rem; color: var(--muted); }
@@ -1011,6 +1012,11 @@ xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)   
         <span class="ctx">Business analysis · Orange CI, Way2Call</span>
         <b>Du besoin métier au KPI</b>
         <p>Recueil des besoins des équipes, définition des indicateurs, analyse des écarts et recommandations présentées en comités de pilotage.</p>
+      </article>
+      <article class="coord">
+        <span class="ctx">Pilotage commercial · réseau de franchises</span>
+        <b>Performance des franchises</b>
+        <p>Suivi des ventes de chaque franchise face à ses objectifs, détection des écarts et recommandations aux managers pour redresser les points de vente en retard.</p>
       </article>
     </div>
   </div>
