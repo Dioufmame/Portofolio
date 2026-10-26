@@ -349,6 +349,50 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .eff.down { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); }
 .models { margin-bottom: 20px; }
 .case-code { margin: 0 0 20px; }
+/* Dashboard leads */
+#p-leads { grid-template-columns: 1.75fr 1fr; }
+.kpi7 { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.kpi7 div { background: var(--bg); border-radius: 10px; padding: 8px 10px; display: grid; gap: 2px; align-content: start; }
+.kpi7 small { font-size: .66rem; color: var(--muted); line-height: 1.25; }
+.kpi7 b { font-family: var(--display); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.lgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 22px; }
+.lgrid > div { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.lgrid .wide { grid-column: 1 / -1; }
+.dash-chart .lb { fill: color-mix(in srgb, var(--lagoon) 38%, transparent); }
+.dash-chart .sl { fill: none; stroke: var(--gold); stroke-width: 2; }
+.dash-chart .sd { fill: var(--gold); }
+.dash-chart .pa1 { fill: color-mix(in srgb, var(--lagoon) 30%, transparent); }
+.dash-chart .pa2 { fill: color-mix(in srgb, var(--muted) 16%, transparent); }
+.legend .lbk, .legend .c1 { background: color-mix(in srgb, var(--lagoon) 38%, transparent); }
+.legend .sdk, .legend .c3 { background: var(--gold); }
+.legend .c2, .legend .pk1 { background: var(--lagoon); }
+.legend .pk2 { background: color-mix(in srgb, var(--muted) 30%, transparent); }
+.camps { display: grid; gap: 12px; }
+.camps > div { display: grid; gap: 4px; font-size: .8rem; }
+.cb { display: grid; gap: 2px; }
+.cb i { display: block; height: 7px; border-radius: 3px; }
+.cb .c1 { background: color-mix(in srgb, var(--lagoon) 38%, transparent); }
+.cb .c2 { background: var(--lagoon); }
+.cb .c3 { background: var(--gold); }
+.camps b { font-family: var(--mono); font-weight: 400; font-size: .7rem; color: var(--muted); }
+.hbars { display: grid; gap: 6px; }
+.hbars div { display: grid; grid-template-columns: minmax(96px, 40%) 1fr 44px; align-items: center; gap: 8px; font-size: .74rem; }
+.hbars span { color: var(--muted); line-height: 1.25; }
+.hbars i { display: block; height: 12px; border-radius: 3px; background: var(--lagoon); }
+.hbars i.rb { background: var(--gold); }
+.hbars b { font-family: var(--mono); font-weight: 500; font-size: .72rem; text-align: right; font-variant-numeric: tabular-nums; }
+.vbars { display: flex; align-items: flex-end; gap: 3px; height: 130px; }
+.vbars div { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; gap: 3px; min-width: 0; }
+.vbars i { display: block; width: 100%; background: var(--lagoon); border-radius: 3px 3px 0 0; }
+.vbars i.vb2 { background: var(--gold); }
+.vbars b, .vbars span { font-family: var(--mono); font-weight: 400; font-size: .6rem; color: var(--muted); }
+.axis-x { font-family: var(--mono); font-size: .64rem; color: var(--muted); text-align: center; }
+.ltable-h { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.exp { font-family: var(--mono); font-size: .7rem; border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; color: var(--ink); }
+.score td.mono { font-family: var(--mono); font-size: .72rem; }
+@media (max-width: 900px) { #p-leads { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .lgrid { grid-template-columns: 1fr; } }
+
 .gain { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 0; padding: 12px 16px; background: color-mix(in srgb, var(--gold) 14%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--band-ink) 12%, transparent); }
 .gain b { font-family: var(--display); font-size: 1.5rem; color: #f3c46a; line-height: 1; }
 .gain span { font-family: var(--mono); font-size: .74rem; color: var(--band-ink); }
@@ -973,35 +1017,42 @@ xgb   <span class="o">&lt;-</span> <span class="f">train</span>(performant <span
         </div>
       </div>
 
-      <!-- Analyse des leads -->
+      <!-- leads:start -->
       <div class="gpanel" role="tabpanel" id="p-leads" aria-labelledby="t-leads" hidden>
         <div class="dash">
-          <div class="dash-top"><b>Lead analysis · this month's campaigns</b><span>rebuild · fictitious data</span></div>
-          <div class="funnel">
-            <div><span>Leads received</span><i style="width:100%"></i><b>10,000</b></div>
-            <div><span>Qualified</span><i style="width:68%"></i><b>6,800</b></div>
-            <div><span>Contacted</span><i style="width:52%"></i><b>5,200</b></div>
-            <div><span>Converted</span><i class="g" style="width:11.5%"></i><b>1,150</b></div>
+          <div class="dash-top"><b>Lead &amp; reachability analysis</b><span>rebuild · fictitious data</span></div>
+          <div class="filters" aria-hidden="true"><span>Month <b>All</b></span><span>Week <b>All</b></span><span>Period <b>W01 → W12</b></span><span>Campaign <b>All</b></span><span>Site <b>All</b></span></div>
+          <div class="kpi7"><div><small>Leads received</small><b>9,480</b></div><div><small>Signed sales</small><b>412</b></div><div><small>Sales rate</small><b>4.3%</b></div><div><small>Closed leads</small><b>3,960</b></div><div><small>Attempts / sale</small><b>3.4</b></div><div><small>Reachability</small><b>61%</b></div><div><small>Attempts to reach</small><b>2.6</b></div></div>
+          <div class="lgrid">
+            <div><span class="mini-h">Leads collected and sales by week</span><svg viewBox="0 0 430 170" class="dash-chart" role="img" aria-label="Leads received and signed sales by week">
+  <g class="grid"><line x1="30" y1="14" x2="404" y2="14"/><line x1="30" y1="81.0" x2="404" y2="81.0"/><line x1="30" y1="148" x2="404" y2="148"/></g>
+  <g class="lbl"><text x="25" y="18" text-anchor="end">1,000</text><text x="25" y="85.0" text-anchor="end">500</text><text x="25" y="152" text-anchor="end">0</text><text x="409" y="18">50</text><text x="409" y="152">0</text><text x="45.6" y="160" text-anchor="middle">W01</text><text x="107.9" y="160" text-anchor="middle">W03</text><text x="170.3" y="160" text-anchor="middle">W05</text><text x="232.6" y="160" text-anchor="middle">W07</text><text x="294.9" y="160" text-anchor="middle">W09</text><text x="357.2" y="160" text-anchor="middle">W11</text></g>
+  <rect x="35.6" y="64.9" width="19.9" height="83.1" class="lb"/><rect x="66.8" y="52.9" width="19.9" height="95.1" class="lb"/><rect x="97.9" y="56.9" width="19.9" height="91.1" class="lb"/><rect x="129.1" y="42.1" width="19.9" height="105.9" class="lb"/><rect x="160.3" y="35.4" width="19.9" height="112.6" class="lb"/><rect x="191.4" y="46.2" width="19.9" height="101.8" class="lb"/><rect x="222.6" y="30.1" width="19.9" height="117.9" class="lb"/><rect x="253.8" y="38.1" width="19.9" height="109.9" class="lb"/><rect x="284.9" y="27.4" width="19.9" height="120.6" class="lb"/><rect x="316.1" y="32.8" width="19.9" height="115.2" class="lb"/><rect x="347.3" y="43.5" width="19.9" height="104.5" class="lb"/><rect x="378.4" y="35.4" width="19.9" height="112.6" class="lb"/><polyline class="sl" points="45.6,83.7 76.8,70.3 107.9,75.6 139.1,59.6 170.3,46.2 201.4,64.9 232.6,38.1 263.8,51.5 294.9,30.1 326.1,43.5 357.2,62.2 388.4,46.2"/><circle cx="45.6" cy="83.7" r="2.6" class="sd"/><circle cx="76.8" cy="70.3" r="2.6" class="sd"/><circle cx="107.9" cy="75.6" r="2.6" class="sd"/><circle cx="139.1" cy="59.6" r="2.6" class="sd"/><circle cx="170.3" cy="46.2" r="2.6" class="sd"/><circle cx="201.4" cy="64.9" r="2.6" class="sd"/><circle cx="232.6" cy="38.1" r="2.6" class="sd"/><circle cx="263.8" cy="51.5" r="2.6" class="sd"/><circle cx="294.9" cy="30.1" r="2.6" class="sd"/><circle cx="326.1" cy="43.5" r="2.6" class="sd"/><circle cx="357.2" cy="62.2" r="2.6" class="sd"/><circle cx="388.4" cy="46.2" r="2.6" class="sd"/>
+</svg><div class="legend"><span><i class="lbk"></i>leads received</span><span><i class="sdk"></i>signed sales</span></div></div>
+            <div><span class="mini-h">Performance by campaign</span><div class="camps"><div><span>Campaign A</span><div class="cb"><i class="c1" style="width:100%"></i><i class="c2" style="width:39%"></i><i class="c3" style="width:4.7%"></i></div><b>4,200 · 1,650 · 196</b></div><div><span>Campaign B</span><div class="cb"><i class="c1" style="width:80%"></i><i class="c2" style="width:35%"></i><i class="c3" style="width:3.4%"></i></div><b>3,380 · 1,460 · 142</b></div><div><span>Campaign C</span><div class="cb"><i class="c1" style="width:45%"></i><i class="c2" style="width:20%"></i><i class="c3" style="width:1.8%"></i></div><b>1,900 · 850 · 74</b></div></div><div class="legend"><span><i class="c1"></i>leads</span><span><i class="c2"></i>closed</span><span><i class="c3"></i>sales</span></div></div>
+            <div><span class="mini-h">Top reachability by attempt</span><div class="table-wrap"><table class="score"><thead><tr><th>Attempt</th><th>Answered</th><th>Rate</th><th>Cumulative</th></tr></thead><tbody><tr><td>T1</td><td>1,820</td><td>19.2%</td><td>19.2%</td></tr><tr><td>T2</td><td>760</td><td>8.0%</td><td>27.2%</td></tr><tr><td>T3</td><td>470</td><td>5.0%</td><td>32.2%</td></tr><tr><td>T4</td><td>330</td><td>3.5%</td><td>35.7%</td></tr><tr><td>T5</td><td>240</td><td>2.5%</td><td>38.2%</td></tr><tr class="tot"><td>Unreachable</td><td>3,690</td><td>38.9%</td><td></td></tr></tbody></table></div></div>
+            <div><span class="mini-h">Top call outcomes</span><div class="hbars"><div><span>Voicemail</span><i class="" style="width:100%"></i><b>5,120</b></div><div><span>Personal callback</span><i class="" style="width:29%"></i><b>1,480</b></div><div><span>No answer</span><i class="" style="width:25%"></i><b>1,260</b></div><div><span>Refused to answer</span><i class="" style="width:19%"></i><b>980</b></div><div><span>Busy</span><i class="" style="width:12%"></i><b>610</b></div><div><span>Lead to call back</span><i class="" style="width:8%"></i><b>420</b></div></div></div>
+            <div><span class="mini-h">Attempts before sale</span><div class="vbars"><div><b>138</b><i class="vb" style="height:100%"></i><span>1</span></div><div><b>92</b><i class="vb" style="height:67%"></i><span>2</span></div><div><b>61</b><i class="vb" style="height:44%"></i><span>3</span></div><div><b>44</b><i class="vb" style="height:32%"></i><span>4</span></div><div><b>30</b><i class="vb" style="height:22%"></i><span>5</span></div><div><b>21</b><i class="vb" style="height:15%"></i><span>6</span></div><div><b>15</b><i class="vb" style="height:11%"></i><span>7</span></div><div><b>11</b><i class="vb" style="height:8%"></i><span>8</span></div></div><span class="axis-x">number of attempts</span></div>
+            <div><span class="mini-h">Sales by hour</span><div class="vbars"><div><b>8</b><i class="vb2" style="height:17%"></i><span>9h</span></div><div><b>31</b><i class="vb2" style="height:66%"></i><span>10h</span></div><div><b>42</b><i class="vb2" style="height:89%"></i><span>11h</span></div><div><b>47</b><i class="vb2" style="height:100%"></i><span>12h</span></div><div><b>26</b><i class="vb2" style="height:55%"></i><span>13h</span></div><div><b>22</b><i class="vb2" style="height:47%"></i><span>14h</span></div><div><b>39</b><i class="vb2" style="height:83%"></i><span>15h</span></div><div><b>44</b><i class="vb2" style="height:94%"></i><span>16h</span></div><div><b>37</b><i class="vb2" style="height:79%"></i><span>17h</span></div><div><b>28</b><i class="vb2" style="height:60%"></i><span>18h</span></div><div><b>12</b><i class="vb2" style="height:26%"></i><span>19h</span></div></div><span class="axis-x">call hour</span></div>
+            <div class="wide"><span class="mini-h">Stated refusal reasons</span><div class="hbars"><div><span>Offer seen as pricier</span><i class="rb" style="width:100%"></i><b>118</b></div><div><span>Wants to compare, think</span><i class="rb" style="width:88%"></i><b>104</b></div><div><span>Just signed elsewhere</span><i class="rb" style="width:73%"></i><b>86</b></div><div><span>Moving soon</span><i class="rb" style="width:44%"></i><b>52</b></div><div><span>Bad past experience</span><i class="rb" style="width:26%"></i><b>31</b></div><div><span>Unhappy with billing</span><i class="rb" style="width:20%"></i><b>24</b></div></div></div>
+            <div class="wide"><span class="mini-h">Answered and unanswered calls by week</span><svg viewBox="0 0 640 150" class="dash-chart" role="img" aria-label="Answered and unanswered calls by week">
+  <g class="grid"><line x1="34" y1="12" x2="632" y2="12"/><line x1="34" y1="128" x2="632" y2="128"/></g>
+  <g class="lbl"><text x="29" y="16" text-anchor="end">1,000</text><text x="29" y="132" text-anchor="end">0</text><text x="34.0" y="140" text-anchor="middle">W01</text><text x="142.7" y="140" text-anchor="middle">W03</text><text x="251.5" y="140" text-anchor="middle">W05</text><text x="360.2" y="140" text-anchor="middle">W07</text><text x="468.9" y="140" text-anchor="middle">W09</text><text x="577.6" y="140" text-anchor="middle">W11</text></g>
+  <path d="M34.0,128 L34.0,56.1 L88.4,45.6 L142.7,49.1 L197.1,36.4 L251.5,30.6 L305.8,39.8 L360.2,25.9 L414.5,32.9 L468.9,23.6 L523.3,28.2 L577.6,37.5 L632.0,30.6 L632.0,128 Z" class="pa2"/><path d="M34.0,128 L34.0,85.1 L88.4,78.1 L142.7,81.6 L197.1,72.3 L251.5,67.7 L305.8,75.8 L360.2,65.4 L414.5,70.0 L468.9,63.0 L523.3,67.7 L577.6,73.5 L632.0,68.8 L632.0,128 Z" class="pa1"/><polyline points="34.0,85.1 88.4,78.1 142.7,81.6 197.1,72.3 251.5,67.7 305.8,75.8 360.2,65.4 414.5,70.0 468.9,63.0 523.3,67.7 577.6,73.5 632.0,68.8" class="line"/>
+</svg><div class="legend"><span><i class="pk1"></i>answered</span><span><i class="pk2"></i>unanswered</span></div></div>
           </div>
-          <div class="table-wrap">
-            <table class="score">
-              <thead><tr><th>Broker</th><th>Leads</th><th>Converted</th><th>Conversion rate</th></tr></thead>
-              <tbody>
-                <tr><td>Broker 1</td><td>4,200</td><td>550</td><td><span class="meter"><i style="width:87.3%"></i></span>13.1%</td></tr>
-                <tr><td>Broker 3</td><td>2,700</td><td>297</td><td><span class="meter"><i style="width:73.3%"></i></span>11.0%</td></tr>
-                <tr><td>Broker 2</td><td>3,100</td><td>304</td><td><span class="meter"><i class="w" style="width:65.3%"></i></span>9.8%</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="dash-note">Full bar = 15% conversion.</p>
+          <div class="ltable-h"><span class="mini-h">Detailed lead table</span><span class="exp">⤓ Full export</span></div>
+          <div class="table-wrap"><table class="score"><thead><tr><th>Lead ID</th><th>Phone</th><th>Campaign</th><th>Site</th><th>Attempts</th><th>Last call</th><th>Final status</th><th>Sale</th></tr></thead><tbody><tr><td class="mono">a3f9c2e17b</td><td>••••••••</td><td>Campaign A</td><td>Site 1</td><td>4</td><td>31/03 19:43</td><td>Voicemail</td><td><span class="pill bad">NO</span></td></tr><tr><td class="mono">8812046</td><td>••••••••</td><td>Campaign B</td><td>Site 1</td><td>2</td><td>31/03 19:31</td><td>Signed sale</td><td><span class="pill ok">YES</span></td></tr><tr><td class="mono">c71d0b9e44</td><td>••••••••</td><td>Campaign A</td><td>Site 2</td><td>6</td><td>31/03 19:28</td><td>Wants to compare, think</td><td><span class="pill bad">NO</span></td></tr><tr><td class="mono">8790315</td><td>••••••••</td><td>Campaign C</td><td>Site 1</td><td>3</td><td>31/03 19:12</td><td>Offer seen as pricier</td><td><span class="pill bad">NO</span></td></tr><tr><td class="mono">e25a8f6c03</td><td>••••••••</td><td>Campaign B</td><td>Site 2</td><td>1</td><td>31/03 18:57</td><td>Signed sale</td><td><span class="pill ok">YES</span></td></tr></tbody></table></div>
+          <p class="dash-note">All figures, campaigns and sites are fictitious. Only the structure, KPIs and charts match the real dashboard.</p>
         </div>
         <div class="sheet">
-          <div><span class="k">The need</span><p>Leads came from several brokers into different CRMs. There was no way to tell which sources and campaigns actually paid off.</p></div>
-          <div><span class="k">What I built</span><p>A pipeline that consolidates and cleans leads from every broker, then a dashboard tracking the full funnel, from lead received to customer converted.</p></div>
-          <div><span class="k">What changed</span><p>Teams see in real time which brokers and campaigns convert, and focus their efforts on the most profitable ones.</p></div>
+          <div><span class="k">The need</span><p>Leads came from several brokers into different CRMs. There was no way to tell which campaigns really paid off, or when and after how many attempts a lead became reachable.</p></div>
+          <div><span class="k">What I built</span><p>A pipeline that consolidates and cleans leads and calls from every broker, then a dashboard filterable by month, week, campaign and site: 7 KPIs, reachability attempt by attempt, call outcomes, sales by hour, refusal reasons and an exportable detail of every lead.</p></div>
+          <div><span class="k">What changed</span><p>Teams know which campaigns convert, what time to call and after how many attempts to stop. They focus on the most profitable leads and time slots.</p></div>
           <ul class="chips"><li>Shiny</li><li>Power BI</li><li>SQL</li><li>R</li><li>ETL</li></ul>
         </div>
       </div>
+      <!-- leads:end -->
     </div>
     <div class="train">
       <div>
