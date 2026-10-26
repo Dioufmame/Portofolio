@@ -724,7 +724,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </figure>
         <figure class="code" id="s-maj" aria-label="Anonymised excerpt of the automatic Excel report refresh script" hidden>
           <figcaption><span>excel_report_refresh.R · sample excerpt</span><button type="button" class="run" data-log="log-maj">▶ Run</button></figcaption>
-          <p class="gain"><b>1 h → 15 min</b><span>per report: 4 times faster than by hand · real gain</span></p>
+          <p class="gain"><b>1 h → 15 min</b><span>per client deliverable, across many automated deliverables: 4 times faster than by hand · real gain</span></p>
 <pre><code><span class="c"># 1. Preprocessing: files received by email → daily dataset</span>
 fichiers <span class="o">&lt;-</span> <span class="f">recuperer_pieces_jointes</span>(boite_mail, expediteurs, jour_ref)
 nouveau  <span class="o">&lt;-</span> fichiers <span class="o">|&gt;</span> <span class="f">map_dfr</span>(lire_export) <span class="o">|&gt;</span> <span class="f">pretraiter</span>() <span class="o">|&gt;</span>

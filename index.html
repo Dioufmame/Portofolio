@@ -725,7 +725,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </figure>
         <figure class="code" id="s-maj" aria-label="Extrait anonymisé du script de mise à jour automatique d'un reporting Excel" hidden>
           <figcaption><span>maj_reporting_excel.R · extrait type</span><button type="button" class="run" data-log="log-maj">▶ Exécuter</button></figcaption>
-          <p class="gain"><b>1 h → 15 min</b><span>par reporting : 4 fois moins de temps qu'à la main · gain réel</span></p>
+          <p class="gain"><b>1 h → 15 min</b><span>par livrable client, sur de nombreux livrables automatisés : 4 fois moins de temps qu'à la main · gain réel</span></p>
 <pre><code><span class="c"># 1. Prétraitement : fichiers reçus par mail → base du jour</span>
 fichiers <span class="o">&lt;-</span> <span class="f">recuperer_pieces_jointes</span>(boite_mail, expediteurs, jour_ref)
 nouveau  <span class="o">&lt;-</span> fichiers <span class="o">|&gt;</span> <span class="f">map_dfr</span>(lire_export) <span class="o">|&gt;</span> <span class="f">pretraiter</span>() <span class="o">|&gt;</span>
