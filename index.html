@@ -601,7 +601,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
             <li><b>Extractions et consolidations multi-sources</b> par des scripts R et SQL réutilisables d'un reporting à l'autre.</li>
             <li><b>Workflows planifiés</b> qui remplacent les copier-coller et les exports manuels : les chiffres sont prêts avant l'arrivée des équipes.</li>
             <li><b>Ciblage marketing automatisé</b> : segmentation quotidienne du parc fibre prépayé selon la date d'expiration, et fichiers prêts pour les campagnes de relance et de rétention.</li>
-            <li><b>Mise à jour automatique des reportings Excel</b> : les templates Power Query se remplissent et partent seuls chaque matin. Les équipes se concentrent sur la vérification et sur les tâches à valeur ajoutée.</li>
+            <li><b>Mise à jour automatique des reportings Excel</b>, en deux temps. D'abord le prétraitement : extraction des fichiers reçus par mail, nettoyage et consolidation. Puis la mise à jour du fichier de reporting lui-même : ajout des lignes, formules étirées, Power Query actualisé et envoi. Les équipes se concentrent sur la vérification et sur les tâches à valeur ajoutée.</li>
             <li><b>Contrôles qualité automatiques</b> à chaque exécution : doublons, valeurs manquantes, écarts anormaux.</li>
             <li><b>Agents autonomes</b> qui collectent et diffusent l'information sans serveur : scraping, planification, intégration d'API.</li>
             <li><b>Documentation et transmission</b> de chaque processus, pour que la solution vive sans moi.</li>
@@ -612,7 +612,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
         </div>
         <div class="scripts">
         <p class="stabs-h">3 scripts à découvrir · touchez un onglet pour changer de script</p>
-        <div class="stabs" role="tablist" aria-label="Choisir un script"><button type="button" role="tab" aria-selected="true" aria-controls="s-rep">Reporting quotidien</button><button type="button" role="tab" aria-selected="false" aria-controls="s-seg">Segmentation campagnes fibre</button><button type="button" role="tab" aria-selected="false" aria-controls="s-maj" id="script-excel">Mise à jour d'un reporting Excel</button></div>
+        <div class="stabs" role="tablist" aria-label="Choisir un script"><button type="button" role="tab" aria-selected="true" aria-controls="s-rep">Reporting quotidien</button><button type="button" role="tab" aria-selected="false" aria-controls="s-seg">Segmentation campagnes fibre</button><button type="button" role="tab" aria-selected="false" aria-controls="s-maj" id="script-excel">Prétraitement et mise à jour d'un reporting Excel</button></div>
         <figure class="code" id="s-rep" aria-label="Extrait type d'un script de reporting automatisé en R">
           <figcaption><span>reporting_quotidien.R · extrait type</span><button type="button" class="run" data-log="log">▶ Exécuter</button></figcaption>
 <pre><code><span class="c"># Reporting quotidien : extraire, consolider, contrôler, publier</span>
@@ -678,26 +678,23 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </figure>
         <figure class="code" id="s-maj" aria-label="Extrait anonymisé du script de mise à jour automatique d'un reporting Excel" hidden>
           <figcaption><span>maj_reporting_excel.R · extrait type</span><button type="button" class="run" data-log="log-maj">▶ Exécuter</button></figcaption>
-<pre><code><span class="c"># Mise à jour du reporting : collecter, ajouter, actualiser, envoyer</span>
-nouveau <span class="o">&lt;-</span> <span class="f">lire_base_du_jour</span>(jour_ref) <span class="o">|&gt;</span>   <span class="c"># J-1, le lundi : vendredi</span>
+<pre><code><span class="c"># 1. Prétraitement : fichiers reçus par mail → base du jour</span>
+fichiers <span class="o">&lt;-</span> <span class="f">recuperer_pieces_jointes</span>(boite_mail, expediteurs, jour_ref)
+nouveau  <span class="o">&lt;-</span> fichiers <span class="o">|&gt;</span> <span class="f">map_dfr</span>(lire_export) <span class="o">|&gt;</span> <span class="f">pretraiter</span>() <span class="o">|&gt;</span>
   <span class="f">anti_join</span>(<span class="f">deja_presentes</span>(template), by = <span class="s">"id_contact"</span>)
 
-xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)   <span class="c"># structure jamais modifiée</span>
+<span class="c"># 2. Mise à jour du fichier de reporting (structure jamais modifiée)</span>
+xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)
 <span class="f">ajouter_lignes</span>(xl, <span class="s">"DATA"</span>, nouveau)
 <span class="f">etirer_formules</span>(xl, <span class="s">"DATA"</span>)
 <span class="f">actualiser_tout</span>(xl)   <span class="c"># Power Query + tableaux croisés</span>
 
-<span class="f">stopifnot</span>(<span class="f">aucune_erreur</span>(xl),   <span class="c"># pas d'envoi si un chiffre</span>
-          <span class="f">totaux_ok</span>(xl, nouveau))  <span class="c"># est douteux</span>
-
-<span class="f">copie_en_valeurs</span>(xl) <span class="o">|&gt;</span>
-  <span class="f">envoyer_mail</span>(destinataires)
-
-<span class="f">log_info</span>(<span class="s">"{nrow(nouveau)} lignes ajoutées"</span>)</code></pre>
+<span class="f">stopifnot</span>(<span class="f">aucune_erreur</span>(xl), <span class="f">totaux_ok</span>(xl, nouveau))  <span class="c"># sinon, pas d'envoi</span>
+<span class="f">copie_en_valeurs</span>(xl) <span class="o">|&gt;</span> <span class="f">envoyer_mail</span>(destinataires)</code></pre>
           <div class="log" id="log-maj" aria-live="polite">
-            <div><time>09:00:03</time> pièces jointes du jour et bases prétraitées récupérées <em>ok</em></div>
-            <div><time>09:00:41</time> 1 284 nouvelles lignes préparées, aucune en double <em>ok</em></div>
-            <div><time>09:01:37</time> template mis à jour : formules étirées, Power Query et TCD actualisés <em>ok</em></div>
+            <div><time>09:00:03</time> prétraitement : 4 fichiers extraits des mails du jour <em>ok</em></div>
+            <div><time>09:00:41</time> nettoyage et consolidation : 1 284 nouvelles lignes, aucune en double <em>ok</em></div>
+            <div><time>09:01:37</time> fichier de reporting mis à jour : formules étirées, Power Query et TCD actualisés <em>ok</em></div>
             <div><time>09:01:52</time> contrôles : aucune erreur Excel, totaux cohérents <em>ok</em></div>
             <div><time>09:02:05</time> sauvegarde faite, copie en valeurs créée <em>ok</em></div>
             <div class="end"><time>09:02:09</time> reporting envoyé · l'équipe n'a plus qu'à vérifier · volumes fictifs</div>

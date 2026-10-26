@@ -600,7 +600,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
             <li><b>Multi-source extraction and consolidation</b> with R and SQL scripts reused from one report to the next.</li>
             <li><b>Scheduled workflows</b> that replace copy-pasting and manual exports: the numbers are ready before the teams arrive.</li>
             <li><b>Automated marketing targeting</b>: daily segmentation of the prepaid fibre base by expiry date, with files ready for reminder and retention campaigns.</li>
-            <li><b>Automatic refresh of Excel reports</b>: Power Query templates fill up and go out on their own every morning. Teams focus on validation and higher-value work.</li>
+            <li><b>Automatic refresh of Excel reports</b>, in two stages. First, preprocessing: extracting the files received by email, cleaning and consolidating them. Then the refresh of the report file itself: new rows appended, formulas extended, Power Query refreshed and the report sent. Teams focus on validation and higher-value work.</li>
             <li><b>Automatic quality checks</b> on every run: duplicates, missing values, abnormal variances.</li>
             <li><b>Autonomous agents</b> that collect and share information without a server: scraping, scheduling, API integration.</li>
             <li><b>Documentation and handover</b> of every process, so the solution lives on without me.</li>
@@ -611,7 +611,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
         </div>
         <div class="scripts">
         <p class="stabs-h">3 scripts to explore · tap a tab to switch script</p>
-        <div class="stabs" role="tablist" aria-label="Choose a script"><button type="button" role="tab" aria-selected="true" aria-controls="s-rep">Daily reporting</button><button type="button" role="tab" aria-selected="false" aria-controls="s-seg">Fibre campaign segmentation</button><button type="button" role="tab" aria-selected="false" aria-controls="s-maj" id="script-excel">Excel report refresh</button></div>
+        <div class="stabs" role="tablist" aria-label="Choose a script"><button type="button" role="tab" aria-selected="true" aria-controls="s-rep">Daily reporting</button><button type="button" role="tab" aria-selected="false" aria-controls="s-seg">Fibre campaign segmentation</button><button type="button" role="tab" aria-selected="false" aria-controls="s-maj" id="script-excel">Excel report preprocessing and refresh</button></div>
         <figure class="code" id="s-rep" aria-label="Sample excerpt of an automated reporting script in R">
           <figcaption><span>daily_reporting.R · sample excerpt</span><button type="button" class="run" data-log="log">▶ Run</button></figcaption>
 <pre><code><span class="c"># Daily reporting: extract, consolidate, check, publish</span>
@@ -677,26 +677,23 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </figure>
         <figure class="code" id="s-maj" aria-label="Anonymised excerpt of the automatic Excel report refresh script" hidden>
           <figcaption><span>excel_report_refresh.R · sample excerpt</span><button type="button" class="run" data-log="log-maj">▶ Run</button></figcaption>
-<pre><code><span class="c"># Report refresh: collect, append, refresh, send</span>
-nouveau <span class="o">&lt;-</span> <span class="f">lire_base_du_jour</span>(jour_ref) <span class="o">|&gt;</span>   <span class="c"># D-1, on Mondays: Friday</span>
+<pre><code><span class="c"># 1. Preprocessing: files received by email → daily dataset</span>
+fichiers <span class="o">&lt;-</span> <span class="f">recuperer_pieces_jointes</span>(boite_mail, expediteurs, jour_ref)
+nouveau  <span class="o">&lt;-</span> fichiers <span class="o">|&gt;</span> <span class="f">map_dfr</span>(lire_export) <span class="o">|&gt;</span> <span class="f">pretraiter</span>() <span class="o">|&gt;</span>
   <span class="f">anti_join</span>(<span class="f">deja_presentes</span>(template), by = <span class="s">"id_contact"</span>)
 
-xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)   <span class="c"># structure never changed</span>
+<span class="c"># 2. Refresh of the report file itself (structure never changed)</span>
+xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)
 <span class="f">ajouter_lignes</span>(xl, <span class="s">"DATA"</span>, nouveau)
 <span class="f">etirer_formules</span>(xl, <span class="s">"DATA"</span>)
 <span class="f">actualiser_tout</span>(xl)   <span class="c"># Power Query + pivot tables</span>
 
-<span class="f">stopifnot</span>(<span class="f">aucune_erreur</span>(xl),   <span class="c"># nothing is sent if a figure</span>
-          <span class="f">totaux_ok</span>(xl, nouveau))  <span class="c"># looks wrong</span>
-
-<span class="f">copie_en_valeurs</span>(xl) <span class="o">|&gt;</span>
-  <span class="f">envoyer_mail</span>(destinataires)
-
-<span class="f">log_info</span>(<span class="s">"{nrow(nouveau)} rows added"</span>)</code></pre>
+<span class="f">stopifnot</span>(<span class="f">aucune_erreur</span>(xl), <span class="f">totaux_ok</span>(xl, nouveau))  <span class="c"># otherwise nothing is sent</span>
+<span class="f">copie_en_valeurs</span>(xl) <span class="o">|&gt;</span> <span class="f">envoyer_mail</span>(destinataires)</code></pre>
           <div class="log" id="log-maj" aria-live="polite">
-            <div><time>09:00:03</time> today's attachments and preprocessed files retrieved <em>ok</em></div>
-            <div><time>09:00:41</time> 1,284 new rows prepared, no duplicates <em>ok</em></div>
-            <div><time>09:01:37</time> template updated: formulas extended, Power Query and pivot tables refreshed <em>ok</em></div>
+            <div><time>09:00:03</time> preprocessing: 4 files extracted from today's emails <em>ok</em></div>
+            <div><time>09:00:41</time> cleaning and consolidation: 1,284 new rows, no duplicates <em>ok</em></div>
+            <div><time>09:01:37</time> report file updated: formulas extended, Power Query and pivot tables refreshed <em>ok</em></div>
             <div><time>09:01:52</time> checks: no Excel errors, totals consistent <em>ok</em></div>
             <div><time>09:02:05</time> backup done, values-only copy created <em>ok</em></div>
             <div class="end"><time>09:02:09</time> report sent · the team only has to review it · fictitious volumes</div>
