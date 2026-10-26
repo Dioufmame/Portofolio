@@ -349,6 +349,9 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .eff.down { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); }
 .models { margin-bottom: 20px; }
 .case-code { margin: 0 0 20px; }
+.gain { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 0; padding: 12px 16px; background: color-mix(in srgb, var(--gold) 14%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--band-ink) 12%, transparent); }
+.gain b { font-family: var(--display); font-size: 1.5rem; color: #f3c46a; line-height: 1; }
+.gain span { font-family: var(--mono); font-size: .74rem; color: var(--band-ink); }
 .score tr.kept td { background: var(--lagoon-soft); font-weight: 600; }
 .zoning .chips li { background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--gold); }
 
@@ -600,7 +603,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
             <li><b>Multi-source extraction and consolidation</b> with R and SQL scripts reused from one report to the next.</li>
             <li><b>Scheduled workflows</b> that replace copy-pasting and manual exports: the numbers are ready before the teams arrive.</li>
             <li><b>Automated marketing targeting</b>: daily segmentation of the prepaid fibre base by expiry date, with files ready for reminder and retention campaigns.</li>
-            <li><b>Automatic refresh of Excel reports</b>, in two stages. First, preprocessing: extracting the files received by email, cleaning and consolidating them. Then the refresh of the report file itself: new rows appended, formulas extended, Power Query refreshed and the report sent. Teams focus on validation and higher-value work.</li>
+            <li><b>Automatic refresh of Excel reports</b>, in two stages. First, preprocessing: extracting the files received by email, cleaning and consolidating them. Then the refresh of the report file itself: new rows appended, formulas extended, Power Query refreshed and the report sent. <b>Result: one hour of manual work cut to 15 minutes.</b> Teams focus on validation and higher-value work.</li>
             <li><b>Automatic quality checks</b> on every run: duplicates, missing values, abnormal variances.</li>
             <li><b>Autonomous agents</b> that collect and share information without a server: scraping, scheduling, API integration.</li>
             <li><b>Documentation and handover</b> of every process, so the solution lives on without me.</li>
@@ -677,6 +680,7 @@ cibles <span class="o">&lt;-</span> parc <span class="o">|&gt;</span> <span clas
         </figure>
         <figure class="code" id="s-maj" aria-label="Anonymised excerpt of the automatic Excel report refresh script" hidden>
           <figcaption><span>excel_report_refresh.R · sample excerpt</span><button type="button" class="run" data-log="log-maj">▶ Run</button></figcaption>
+          <p class="gain"><b>1 h → 15 min</b><span>per report: 4 times faster than by hand · real gain</span></p>
 <pre><code><span class="c"># 1. Preprocessing: files received by email → daily dataset</span>
 fichiers <span class="o">&lt;-</span> <span class="f">recuperer_pieces_jointes</span>(boite_mail, expediteurs, jour_ref)
 nouveau  <span class="o">&lt;-</span> fichiers <span class="o">|&gt;</span> <span class="f">map_dfr</span>(lire_export) <span class="o">|&gt;</span> <span class="f">pretraiter</span>() <span class="o">|&gt;</span>
