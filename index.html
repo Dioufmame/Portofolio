@@ -69,6 +69,8 @@ nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
 nav ul a { color: var(--muted); text-decoration: none; font-size: .95rem; }
 nav ul a:hover { color: var(--ink); }
 .nav-cta { font-weight: 600; color: var(--ink) !important; }
+.lang a { font-family: var(--mono); font-size: .8rem; font-weight: 500; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+.lang a:hover { border-color: var(--ink); }
 
 /* Hero */
 .hero { padding-block: clamp(48px, 7vw, 88px) clamp(56px, 7vw, 96px); }
@@ -163,7 +165,7 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
   .hero .wrap { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
   .kit { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  nav ul li:not(:last-child) { display: none; }
+  nav ul li:not(:last-child):not(.lang) { display: none; }
 }
 @media (max-width: 600px) {
   body { font-size: 16px; }
@@ -346,6 +348,7 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .eff.up { background: var(--lagoon-soft); color: var(--lagoon); }
 .eff.down { background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad); }
 .models { margin-bottom: 20px; }
+.case-code { margin: 0 0 20px; }
 .score tr.kept td { background: var(--lagoon-soft); font-weight: 600; }
 .zoning .chips li { background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--gold); }
 
@@ -483,6 +486,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
       <li><a href="#dashboards">Dashboards</a></li>
       <li><a href="#projets">Projets</a></li>
       <li><a href="#parcours">Parcours</a></li>
+      <li class="lang"><a href="en/" hreflang="en" lang="en" title="English version">EN</a></li>
       <li><a class="nav-cta" href="#contact">Travaillons ensemble →</a></li>
     </ul>
   </div>
@@ -503,6 +507,7 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
       </p>
       <div class="btns">
         <a class="btn solid" href="#contact">Me contacter</a>
+        <a class="btn" href="cv/CV_Mame_Abdoulaye_Diouf_FR.pdf" download>Télécharger mon CV</a>
         <a class="btn" href="#ingenierie">Voir mon savoir-faire</a>
       </div>
     </div>
@@ -751,6 +756,34 @@ xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)   
       <li><span class="sn">Choisir</span><h3>Retenir la logistique</h3><p>Seul modèle à détecter réellement les partenaires performants, meilleur F1, et interprétable : chaque effet se traduit en décision.</p></li>
       <li><span class="sn">Décider</span><h3>Zonage et formation</h3><p>Réaffectation des zones selon le profil des partenaires. Les moins performants ont ensuite été formés via l'école de la fibre, avec des ventes de meilleure qualité à la clé.</p></li>
     </ol>
+
+    <figure class="code case-code" aria-label="Extrait type du script du modèle de sous-performance en R">
+      <figcaption><span>modele_sous_performance.R · extrait type</span><button type="button" class="run" data-log="log-cas">▶ Exécuter</button></figcaption>
+<pre><code><span class="c"># Modèle de sous-performance : préparer, rééquilibrer, comparer</span>
+base <span class="o">&lt;-</span> base_ventes <span class="o">|&gt;</span>
+  <span class="f">mutate</span>(freq_loc   = <span class="f">freq_encode</span>(ville),     <span class="c"># dynamisme de la zone</span>
+         volatilite = sd_mensuel <span class="o">/</span> moy_mensuelle,  <span class="c"># irrégularité des ventes</span>
+         performant = taux_realisation <span class="o">&gt;=</span> seuil) <span class="o">|&gt;</span>
+  <span class="f">mutate</span>(<span class="f">across</span>(<span class="f">c</span>(anciennete, freq_loc, volatilite, nb_concurrents), scale))
+
+idx   <span class="o">&lt;-</span> <span class="f">createDataPartition</span>(base$performant, p = <span class="n">0.7</span>)  <span class="c"># stratifié 70 / 30</span>
+train <span class="o">&lt;-</span> <span class="f">SMOTE</span>(base[idx, ])                             <span class="c"># classes rééquilibrées</span>
+
+logit <span class="o">&lt;-</span> <span class="f">glm</span>(performant <span class="o">~</span> anciennete <span class="o">+</span> freq_loc <span class="o">+</span> volatilite <span class="o">+</span> nb_concurrents,
+             family = binomial, data = train)
+ctrl  <span class="o">&lt;-</span> <span class="f">trainControl</span>(method = <span class="s">"cv"</span>, number = <span class="n">5</span>)       <span class="c"># validation croisée</span>
+rf    <span class="o">&lt;-</span> <span class="f">train</span>(performant <span class="o">~</span> ., train, method = <span class="s">"rf"</span>,      trControl = ctrl)
+xgb   <span class="o">&lt;-</span> <span class="f">train</span>(performant <span class="o">~</span> ., train, method = <span class="s">"xgbTree"</span>, trControl = ctrl)
+
+<span class="f">map</span>(<span class="f">list</span>(logit, rf, xgb), evaluer, test = base[<span class="o">-</span>idx, ])  <span class="c"># F1, AUC, sensibilité</span></code></pre>
+      <div class="log" id="log-cas" aria-live="polite">
+        <div><time>10:02:11</time> base préparée · 4 variables standardisées <em>ok</em></div>
+        <div><time>10:02:13</time> découpage stratifié 70 / 30 · SMOTE sur l'apprentissage <em>ok</em></div>
+        <div><time>10:02:14</time> logit ajusté · localisation ▲▲ · ancienneté ▲ · volatilité ▲ · concurrents ▼ <em>ok</em></div>
+        <div><time>10:02:41</time> validation croisée à 5 plis · Random Forest et XGBoost <em>ok</em></div>
+        <div class="end"><time>10:02:42</time> logit retenu : F1 0,57 · AUC 0,75, le meilleur compromis</div>
+      </div>
+    </figure>
 
     <div class="case-grid">
       <div class="case-card">
@@ -1106,6 +1139,7 @@ xl <span class="o">&lt;-</span> <span class="f">ouvrir_excel</span>(template)   
       <a class="btn" href="https://wa.me/2250748464794">WhatsApp</a>
     </div>
     <div class="btns">
+      <a class="btn solid" href="cv/CV_Mame_Abdoulaye_Diouf_FR.pdf" download>Télécharger mon CV (PDF)</a>
       <a class="btn" href="https://www.linkedin.com/in/mameabdoulaye-diouf-403329206">LinkedIn</a>
     </div>
   </div>
