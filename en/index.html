@@ -183,6 +183,7 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .q { font-family: var(--mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--lagoon); }
 .pillar-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
 .pillar-grid .proof { border-top: none; padding-top: 0; }
+.pillar-grid .proof.proof-auto { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--line); }
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; min-width: 0; }
 .ticks li { padding-left: 26px; position: relative; color: var(--muted); }
 .ticks li::before { content: ""; position: absolute; left: 0; top: .55em; width: 12px; height: 2px; background: var(--gold); }
@@ -648,12 +649,17 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
             <li><b>Scheduled workflows</b> that replace copy-pasting and manual exports: the numbers are ready before the teams arrive.</li>
             <li><b>Automated marketing targeting</b>: daily segmentation of the prepaid fibre base by expiry date, with files ready for reminder and retention campaigns.</li>
             <li><b>Automatic refresh of Excel reports</b>, in two stages. First, preprocessing: extracting the files received by email, cleaning and consolidating them. Then the refresh of the report file itself: new rows appended, formulas extended, Power Query refreshed and the report sent. <b>Result: one hour of manual work cut to 15 minutes.</b> Teams focus on validation and higher-value work.</li>
+            <li><b>Sales recovered through automation</b>: by re-running the reporting over the whole of 2026, I detected nearly 267 sales that were not showing up because of inconsistent label naming. Claimed from the clients after reconciliation, they were confirmed and then paid: <b>about €53,000 recovered.</b></li>
             <li><b>Automatic quality checks</b> on every run: duplicates, missing values, abnormal variances.</li>
             <li><b>Autonomous agents</b> that collect and share information without a server: scraping, scheduling, API integration.</li>
             <li><b>Documentation and handover</b> of every process, so the solution lives on without me.</li>
           </ul>
           <div class="principles">
             <span>reusable</span><span>scheduled</span><span>checked</span><span>documented</span>
+          </div>
+          <div class="proof proof-auto">
+            <span class="big">≈ €53,000</span>
+            <small>in recovered sales: nearly 267 sales missing from the reports, detected by automatically re-running the whole of 2026, then claimed from and paid by the clients · Way2Call</small>
           </div>
         </div>
         <div class="scripts">

@@ -183,6 +183,7 @@ footer .wrap { border-top: 1px solid color-mix(in srgb, var(--band-ink) 14%, tra
 .q { font-family: var(--mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--lagoon); }
 .pillar-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
 .pillar-grid .proof { border-top: none; padding-top: 0; }
+.pillar-grid .proof.proof-auto { margin-top: 22px; padding-top: 18px; border-top: 1px dashed var(--line); }
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; min-width: 0; }
 .ticks li { padding-left: 26px; position: relative; color: var(--muted); }
 .ticks li::before { content: ""; position: absolute; left: 0; top: .55em; width: 12px; height: 2px; background: var(--gold); }
@@ -649,12 +650,17 @@ table.score { width: 100%; border-collapse: collapse; font-size: .82rem; font-va
             <li><b>Workflows planifiés</b> qui remplacent les copier-coller et les exports manuels : les chiffres sont prêts avant l'arrivée des équipes.</li>
             <li><b>Ciblage marketing automatisé</b> : segmentation quotidienne du parc fibre prépayé selon la date d'expiration, et fichiers prêts pour les campagnes de relance et de rétention.</li>
             <li><b>Mise à jour automatique des reportings Excel</b>, en deux temps. D'abord le prétraitement : extraction des fichiers reçus par mail, nettoyage et consolidation. Puis la mise à jour du fichier de reporting lui-même : ajout des lignes, formules étirées, Power Query actualisé et envoi. <b>Résultat : 1 heure de travail manuel ramenée à 15 minutes.</b> Les équipes se concentrent sur la vérification et sur les tâches à valeur ajoutée.</li>
+            <li><b>Ventes récupérées grâce à l'automatisation</b> : en refaisant le reporting sur toute l'année 2026, j'ai détecté près de 267 ventes qui ne remontaient pas à cause de la nomenclature des libellés. Réclamées aux clients après rapprochement, elles ont été confirmées puis payées : <b>environ 53 000 € récupérés.</b></li>
             <li><b>Contrôles qualité automatiques</b> à chaque exécution : doublons, valeurs manquantes, écarts anormaux.</li>
             <li><b>Agents autonomes</b> qui collectent et diffusent l'information sans serveur : scraping, planification, intégration d'API.</li>
             <li><b>Documentation et transmission</b> de chaque processus, pour que la solution vive sans moi.</li>
           </ul>
           <div class="principles">
             <span>réutilisable</span><span>planifié</span><span>contrôlé</span><span>documenté</span>
+          </div>
+          <div class="proof proof-auto">
+            <span class="big">≈ 53 000 €</span>
+            <small>de ventes récupérées : près de 267 ventes qui ne remontaient pas dans les reportings, détectées en refaisant automatiquement toute l'année 2026, puis réclamées et payées par les clients · Way2Call</small>
           </div>
         </div>
         <div class="scripts">
