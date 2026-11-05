@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>CV · Mame Abdoulaye Diouf</title>
+<style>
+:root { --bg: #f3efe6; --ink: #1d2a2f; --muted: #5d6a6e; }
+@media (prefers-color-scheme: dark) { :root { --bg: #121a1d; --ink: #eef0ea; --muted: #9aa7aa; } }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, sans-serif; }
+body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 860px; margin: 0 auto; padding: 16px; font-size: .9rem; }
+header a { color: var(--ink); text-decoration: none; font-weight: 600; }
+header span { color: var(--muted); }
+main { max-width: 860px; margin: 0 auto; padding: 0 16px 40px; display: grid; gap: 20px; }
+.pg { position: relative; box-shadow: 0 4px 24px rgba(0,0,0,.18); background: #fff; }
+.pg img { display: block; width: 100%; height: auto; pointer-events: none; }
+.pg::after { content: ""; position: absolute; inset: 0; }
+@media print { body * { display: none !important; } body::after { content: "CV en consultation uniquement"; display: block; padding: 40px; } }
+</style>
+</head>
+<body>
+<header><a href="../">← Retour au portfolio</a><span>CV en consultation uniquement</span></header>
+<main>
+<div class="pg"><img src="cv-fr-1.webp" alt="CV de Mame Abdoulaye Diouf, page 1" width="794" height="1124" draggable="false" loading="eager"></div>
+<div class="pg"><img src="cv-fr-2.webp" alt="CV de Mame Abdoulaye Diouf, page 2" width="794" height="1124" draggable="false" loading="lazy"></div>
+</main>
+<script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+document.addEventListener('keydown', e => { const k = e.key.toLowerCase(); if ((e.ctrlKey || e.metaKey) && (k === 's' || k === 'p')) e.preventDefault(); });
+</script>
+</body>
+</html>
