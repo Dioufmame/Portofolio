@@ -1334,6 +1334,34 @@ xgb   <span class="o">&lt;-</span> <span class="f">train</span>(performant <span
   cv.addEventListener('click', () => { if (!reduce) { settled = false; mouse = null; t0 = null; requestAnimationFrame(frame); } });
 })();
 </script>
+<!-- Événements anonymes GoatCounter : clics sur les contacts et le CV, sections lues -->
+<script>
+(function () {
+  var lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  function send(name) {
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name + '-' + lang, title: name, event: true }); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('a, button'); if (!el) return;
+    var h = el.getAttribute('href') || '';
+    if (h.indexOf('tel:') === 0) send('clic-appeler');
+    else if (h.indexOf('wa.me') > -1) send('clic-whatsapp');
+    else if (h.indexOf('linkedin.com') > -1) send('clic-linkedin');
+    else if (/cv\//.test(h)) send('clic-cv');
+    else if (el.id === 'copy') send('clic-copier-email');
+  });
+  if ('IntersectionObserver' in window) {
+    var seen = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var id = en.target.id;
+        if (en.isIntersecting && !seen[id]) { seen[id] = 1; send('section-' + id); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -50% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
 <!-- Mesure d'audience anonyme (GoatCounter) -->
 <script data-goatcounter="https://dioufmameabdou.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
